@@ -24,10 +24,10 @@ class HomeScreen extends StatelessWidget {
             icon: Icon(Icons.local_restaurant_sharp),
             label: "Order History",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.profile_circled),
-            label: "Profile",
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(CupertinoIcons.profile_circled),
+          //   label: "Profile",
+          // ),
         ],
       ),
     );

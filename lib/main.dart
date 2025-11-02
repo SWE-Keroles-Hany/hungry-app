@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/routes/app_routes.dart';
+import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/home_screen.dart';
+import 'package:hungry_app/splash_screen.dart';
 
 void main() {
   runApp(const HungryApp());
@@ -15,8 +17,9 @@ class HungryApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: (context, child) => MaterialApp(
+        theme: AppTheme.theme,
         debugShowCheckedModeBanner: false,
-        initialRoute: HomeScreen.routeName,
+        initialRoute: SplashScreen.routeName,
         routes: AppRoutes.routes,
       ),
       minTextAdapt: true,
