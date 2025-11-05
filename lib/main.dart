@@ -4,7 +4,6 @@ import 'package:hungry_app/core/routes/app_routes.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:hungry_app/home_screen.dart';
-import 'package:hungry_app/splash_screen.dart';
 
 void main() {
   runApp(const HungryApp());
@@ -19,7 +18,7 @@ class HungryApp extends StatelessWidget {
       builder: (context, child) => MaterialApp(
         theme: AppTheme.theme,
         debugShowCheckedModeBanner: false,
-        initialRoute: LoginScreen.routeName,
+        initialRoute: HomeScreen.routeName,
         routes: AppRoutes.routes,
       ),
       minTextAdapt: true,

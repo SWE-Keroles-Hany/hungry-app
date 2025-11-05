@@ -13,6 +13,11 @@ class AppTheme {
   static const Color yellow = Colors.yellow;
 
   static ThemeData theme = ThemeData(
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      type: BottomNavigationBarType.fixed,
+
+      backgroundColor: Colors.transparent,
+    ),
     textTheme: TextTheme(
       labelSmall: TextStyle(
         color: white,

@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         backgroundColor: AppTheme.primaryColor,
         body: Padding(
-          padding: EdgeInsets.all(16.r),
+          padding: EdgeInsets.all(20.r),
           child: Form(
             key: _globalKey,
             child: SingleChildScrollView(
