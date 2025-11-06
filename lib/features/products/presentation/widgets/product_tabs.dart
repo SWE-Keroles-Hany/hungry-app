@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/products/presentation/widgets/tab_item.dart';
 
-import 'home_tab.dart';
 
 class ProductTabs extends StatefulWidget {
   const ProductTabs({super.key});

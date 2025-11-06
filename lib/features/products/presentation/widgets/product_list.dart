@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hungry_app/features/products/presentation/screens/product_details_screen.dart';
 import 'package:hungry_app/features/products/presentation/widgets/product_item.dart';
 
 class ProductList extends StatelessWidget {
@@ -19,12 +20,17 @@ class ProductList extends StatelessWidget {
           crossAxisCount: 2,
         ),
         itemBuilder: (context, index) {
-          return ProductItem(
-            imgURL: "assets/images/image.png",
-            textTheme: textTheme,
-            description: 'Kero',
-            rate: 1,
-            title: 'asdf',
+          return GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(ProductDetailsScreen.routeName);
+            },
+            child: ProductItem(
+              imgURL: "assets/images/image.png",
+              textTheme: textTheme,
+              description: 'Kero',
+              rate: 1,
+              title: 'asdf',
+            ),
           );
         },
       ),

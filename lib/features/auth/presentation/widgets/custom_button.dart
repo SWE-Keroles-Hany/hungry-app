@@ -6,28 +6,34 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     required this.onPressed,
     super.key,
-    required this.textTheme,
     required this.title,
+
+    required this.titleColor,
+    required this.bgColor,
+    this.radiusNumber = 8.0,
   });
   final void Function()? onPressed;
-  final TextTheme textTheme;
   final String title;
+  final Color bgColor;
+  final Color titleColor;
+  final double radiusNumber;
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         fixedSize: Size(double.infinity, 60.h),
         // padding: EdgeInsets.all(8.r),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusGeometry.circular(8.r),
+          borderRadius: BorderRadiusGeometry.circular(radiusNumber.r),
         ),
-        backgroundColor: AppTheme.white,
+        backgroundColor: bgColor,
       ),
       onPressed: onPressed,
       child: Text(
         title,
-        style: textTheme.labelMedium!.copyWith(color: AppTheme.black),
+        style: textTheme.labelMedium!.copyWith(color: titleColor),
       ),
     );
   }

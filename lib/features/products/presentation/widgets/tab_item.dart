@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,7 +17,7 @@ class TabItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50.h,
+      height: 45.h,
       padding: EdgeInsets.symmetric(horizontal: 30.w),
       margin: EdgeInsets.all(4.r),
       decoration: BoxDecoration(

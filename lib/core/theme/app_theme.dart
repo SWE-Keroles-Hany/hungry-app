@@ -13,10 +13,17 @@ class AppTheme {
   static const Color yellow = Colors.yellow;
 
   static ThemeData theme = ThemeData(
+    appBarTheme: AppBarTheme(backgroundColor: white),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
 
       backgroundColor: Colors.transparent,
+    ),
+    sliderTheme: SliderThemeData(
+      trackHeight: 10.h,
+
+      // overlayShape: SliderComponentShape.noThumb,
+      valueIndicatorColor: black,
     ),
     textTheme: TextTheme(
       labelSmall: TextStyle(
@@ -27,6 +34,11 @@ class AppTheme {
       labelMedium: TextStyle(
         color: mediumGray,
         fontSize: 20.sp,
+        fontWeight: FontWeight.bold,
+      ),
+      labelLarge: TextStyle(
+        color: mediumGray,
+        fontSize: 25.sp,
         fontWeight: FontWeight.bold,
       ),
     ),

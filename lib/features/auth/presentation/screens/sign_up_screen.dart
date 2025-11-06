@@ -73,11 +73,12 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 30.h),
                   CustomButton(
+                    bgColor: AppTheme.white,
+                    titleColor: AppTheme.black,
                     title: "Sign up",
                     onPressed: () {
                       if (_globalKey.currentState!.validate()) {}
                     },
-                    textTheme: textTheme,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

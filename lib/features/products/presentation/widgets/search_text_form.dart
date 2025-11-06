@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
@@ -35,7 +34,7 @@ class SearchTextForm extends StatelessWidget {
         cursorColor: AppTheme.darkBrown,
         cursorRadius: Radius.circular(2.r),
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 22.h),
+          contentPadding: EdgeInsets.symmetric(vertical: 18.h),
           fillColor: AppTheme.white,
           filled: true,
 
