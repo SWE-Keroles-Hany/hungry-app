@@ -8,12 +8,14 @@ class TotalPriceWithAction extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.totalPrice,
+    required this.width,
 
     required this.title,
   });
   final Function()? onPressed;
   final String title;
   final double totalPrice;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class TotalPriceWithAction extends StatelessWidget {
         TotalPrice(totalPrice: totalPrice),
         Spacer(),
         CustomButton(
+          width: width,
           radiusNumber: 20,
           bgColor: AppTheme.primaryColor,
           titleColor: AppTheme.white,

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
+import 'package:hungry_app/features/cart/presentation/widgets/cart_tab.dart';
 import 'package:hungry_app/features/products/presentation/widgets/home_tab.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedTab = 0;
 
-  final List<Widget> tabs = [HomeTab(), Text("2"), Text("3"), Text("4")];
+  final List<Widget> tabs = [HomeTab(), CartTab(), Text("3"), Text("4")];
 
   @override
   Widget build(BuildContext context) {

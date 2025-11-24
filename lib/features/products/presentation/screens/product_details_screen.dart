@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
-import 'package:hungry_app/features/auth/presentation/widgets/custom_button.dart';
 import 'package:hungry_app/features/products/presentation/widgets/custom_slider.dart';
 import 'package:hungry_app/features/products/presentation/widgets/side_option_item.dart';
 import 'package:hungry_app/features/products/presentation/widgets/side_options_title.dart';
-import 'package:hungry_app/features/products/presentation/widgets/total_price.dart';
 import 'package:hungry_app/features/products/presentation/widgets/total_price_with_action.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
@@ -81,6 +79,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               SizedBox(height: 10.h),
 
               TotalPriceWithAction(
+                width: 200,
                 totalPrice: 20,
                 onPressed: () {},
                 title: "Add To Cart",

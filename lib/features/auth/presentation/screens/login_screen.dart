@@ -57,6 +57,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 30.h),
                   CustomButton(
+                    width: size.width * 0.8,
                     bgColor: AppTheme.white,
                     titleColor: AppTheme.black,
                     title: "Login",
