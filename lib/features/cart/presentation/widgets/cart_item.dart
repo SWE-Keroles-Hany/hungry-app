@@ -69,7 +69,7 @@ class CartItem extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {},
-                      child: Image.asset("assets/images/minus_icon.png"),
+                      child: Image.asset("assets/icons/minus_icon.png"),
                     ),
                     Text(
                       "1",
@@ -80,7 +80,7 @@ class CartItem extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {},
-                      child: Image.asset("assets/images/plus_icon.png"),
+                      child: Image.asset("assets/icons/plus_icon.png"),
                     ),
                   ],
                 ),

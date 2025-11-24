@@ -28,7 +28,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             children: [
               Row(
                 children: [
-                  Expanded(child: Image.asset("assets/images/pngwing.png")),
+                  Expanded(child: Image.asset("assets/icons/pngwing.png")),
                   SizedBox(width: 30.w),
                   Expanded(
                     child: Column(
@@ -57,7 +57,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (_, index) =>
-                      SideOptionItem(addIcon: "assets/images/add.png"),
+                      SideOptionItem(addIcon: "assets/icons/add.png"),
                   separatorBuilder: (_, index) => SizedBox(width: 20.w),
                   itemCount: 10,
                 ),
@@ -70,7 +70,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (_, index) => SideOptionItem(
-                    addIcon: "assets/images/green_add_icon.png",
+                    addIcon: "assets/icons/green_add_icon.png",
                   ),
                   separatorBuilder: (_, index) => SizedBox(width: 20.w),
                   itemCount: 10,

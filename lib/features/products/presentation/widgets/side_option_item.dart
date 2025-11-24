@@ -92,7 +92,7 @@ class SideOptionItem extends StatelessWidget {
             // border: Border.all(),
             borderRadius: BorderRadius.circular(15.sp),
           ),
-          child: Image.asset("assets/images/tp.png"),
+          child: Image.asset("assets/icons/tp.png"),
         ),
       ],
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/features/cart/presentation/widgets/cart_item.dart';
+import 'package:hungry_app/features/checkout/presentation/screens/checkout_screen.dart';
 import 'package:hungry_app/features/products/presentation/widgets/total_price_with_action.dart';
 
 class CartTab extends StatelessWidget {
@@ -22,7 +23,8 @@ class CartTab extends StatelessWidget {
           SizedBox(height: 10),
           TotalPriceWithAction(
             width: 200,
-            onPressed: () {},
+            onPressed: () =>
+                Navigator.of(context).pushNamed(CheckoutScreen.routeName),
             totalPrice: 100,
             title: "Checkout",
           ),

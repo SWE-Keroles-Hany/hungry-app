@@ -45,7 +45,7 @@ class SearchTextForm extends StatelessWidget {
           prefixIcon: Padding(
             padding: EdgeInsets.only(left: 8.w, right: 6.w),
             child: Image.asset(
-              "assets/images/search.png",
+              "assets/icons/search.png",
               // fit: BoxFit.contain,
             ),
           ),

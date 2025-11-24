@@ -10,7 +10,7 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SvgPicture.asset("assets/images/green_logo.svg"),
+        SvgPicture.asset("assets/icons/green_logo.svg"),
         Spacer(),
         ClipRRect(
           borderRadius: BorderRadiusGeometry.circular(16.r),
