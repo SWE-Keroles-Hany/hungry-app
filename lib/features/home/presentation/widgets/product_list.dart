@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hungry_app/features/products/presentation/screens/product_details_screen.dart';
-import 'package:hungry_app/features/products/presentation/widgets/product_item.dart';
+import 'package:hungry_app/features/home/presentation/screens/product_details_screen.dart';
+import 'package:hungry_app/features/home/presentation/widgets/product_item.dart';
 
 class ProductList extends StatelessWidget {
   const ProductList({super.key});

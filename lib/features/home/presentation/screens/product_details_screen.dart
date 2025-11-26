@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
-import 'package:hungry_app/features/products/presentation/widgets/custom_slider.dart';
-import 'package:hungry_app/features/products/presentation/widgets/side_option_item.dart';
-import 'package:hungry_app/features/products/presentation/widgets/side_options_title.dart';
-import 'package:hungry_app/features/products/presentation/widgets/total_price_with_action.dart';
+import 'package:hungry_app/features/home/presentation/widgets/custom_slider.dart';
+import 'package:hungry_app/features/home/presentation/widgets/side_option_item.dart';
+import 'package:hungry_app/features/home/presentation/widgets/side_options_title.dart';
+import 'package:hungry_app/features/home/presentation/widgets/total_price_with_action.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   static const String routeName = "ProductDetailsScreen";

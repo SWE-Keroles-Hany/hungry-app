@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
-import 'package:hungry_app/features/products/presentation/widgets/tab_item.dart';
+import 'package:hungry_app/features/home/presentation/widgets/tab_item.dart';
 
 
 class ProductTabs extends StatefulWidget {

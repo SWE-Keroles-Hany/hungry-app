@@ -8,7 +8,7 @@ import 'package:hungry_app/features/checkout/presentation/widgets/order_label_wi
 import 'package:hungry_app/features/checkout/presentation/widgets/order_time.dart';
 import 'package:hungry_app/features/checkout/presentation/widgets/order_total_with_price.dart';
 import 'package:hungry_app/features/checkout/presentation/widgets/visa_method.dart';
-import 'package:hungry_app/features/products/presentation/widgets/total_price_with_action.dart';
+import 'package:hungry_app/features/home/presentation/widgets/total_price_with_action.dart';
 
 class CheckoutScreen extends StatefulWidget {
   static const String routeName = "CheckoutScreen";

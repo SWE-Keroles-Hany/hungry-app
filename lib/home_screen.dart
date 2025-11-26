@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/cart/presentation/widgets/cart_tab.dart';
-import 'package:hungry_app/features/products/presentation/widgets/home_tab.dart';
+import 'package:hungry_app/features/home/presentation/widgets/home_tab.dart';
+import 'package:hungry_app/features/order_history/presentation/widgets/order_history_tab.dart';
 import 'package:hungry_app/features/profile/presentation/screens/profile_tab.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,7 +19,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedTab = 0;
 
-  final List<Widget> tabs = [HomeTab(), CartTab(), Text("3"), ProfileTab()];
+  final List<Widget> tabs = [
+    HomeTab(),
+    CartTab(),
+    OrderHistoryTab(),
+    ProfileTab(),
+  ];
 
   @override
   Widget build(BuildContext context) {

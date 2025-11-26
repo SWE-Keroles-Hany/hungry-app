@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/auth/presentation/widgets/custom_button.dart';
-import 'package:hungry_app/features/products/presentation/widgets/total_price.dart';
+import 'package:hungry_app/features/home/presentation/widgets/total_price.dart';
 
 class TotalPriceWithAction extends StatelessWidget {
   const TotalPriceWithAction({
