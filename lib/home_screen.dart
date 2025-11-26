@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/cart/presentation/widgets/cart_tab.dart';
 import 'package:hungry_app/features/products/presentation/widgets/home_tab.dart';
+import 'package:hungry_app/features/profile/presentation/screens/profile_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "HomeScreen";
@@ -17,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedTab = 0;
 
-  final List<Widget> tabs = [HomeTab(), CartTab(), Text("3"), Text("4")];
+  final List<Widget> tabs = [HomeTab(), CartTab(), Text("3"), ProfileTab()];
 
   @override
   Widget build(BuildContext context) {
