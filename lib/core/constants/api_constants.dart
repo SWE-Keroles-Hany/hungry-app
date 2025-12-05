@@ -1,0 +1,6 @@
+class APIConstants {
+  static const String baseURL = "https://sonic-zdi0.onrender.com/api";
+  static const String login = "/login";
+  static const String logout = "/logout";
+  static const String signUp = "/register";
+}

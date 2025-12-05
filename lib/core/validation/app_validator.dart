@@ -17,8 +17,8 @@ class AppValidator {
   }
 
   static String? passwordValidator({String? value}) {
-    if (value == null || value.trim().isEmpty || value.length < 7) {
-      return "Password Can't be less than 7 characters";
+    if (value == null || value.trim().isEmpty || value.length < 8) {
+      return "Password Can't be less than 8 characters";
     }
     return null;
   }
