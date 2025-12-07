@@ -11,7 +11,7 @@ import 'package:hungry_app/features/auth/presentation/cubit/auth_states.dart';
 import 'package:hungry_app/features/auth/presentation/screens/login_screen.dart';
 import 'package:hungry_app/features/auth/presentation/widgets/custom_button.dart';
 import 'package:hungry_app/features/auth/presentation/widgets/custom_input_field.dart';
-import 'package:hungry_app/home_screen.dart';
+import 'package:hungry_app/features/home/presentation/screens/home_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   static const String routeName = "SignUpScreen";

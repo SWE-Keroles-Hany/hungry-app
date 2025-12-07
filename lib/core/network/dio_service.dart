@@ -33,6 +33,8 @@ class DioService implements APIService {
       return handleResponse(response);
     } on DioException catch (exception) {
       return handleDioError(exception);
+    } catch (_) {
+      throw AppException("Some Thing Went Wrong");
     }
   }
 
@@ -46,6 +48,8 @@ class DioService implements APIService {
       return handleResponse(response);
     } on DioException catch (exception) {
       return handleDioError(exception);
+    } catch (_) {
+      throw AppException("Some Thing Went Wrong");
     }
   }
 
@@ -65,7 +69,7 @@ class DioService implements APIService {
     } on DioException catch (exception) {
       log(exception.message ?? "");
       return handleDioError(exception);
-    } catch (error) {
+    } catch (_) {
       throw AppException("Some Thing Went Wrong");
     }
   }
@@ -85,6 +89,8 @@ class DioService implements APIService {
       return handleResponse(response);
     } on DioException catch (exception) {
       return handleDioError(exception);
+    } catch (_) {
+      throw AppException("Some Thing Went Wrong");
     }
   }
 }

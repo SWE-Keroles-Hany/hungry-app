@@ -3,4 +3,6 @@ class APIConstants {
   static const String login = "/login";
   static const String logout = "/logout";
   static const String signUp = "/register";
+  static const String categories = "/categories";
+  static const String products = "/products";
 }

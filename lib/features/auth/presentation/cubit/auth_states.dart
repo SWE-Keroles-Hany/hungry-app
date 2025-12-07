@@ -32,3 +32,13 @@ class LogOutErrorState implements AuthStates {
 class LogOutLoadingState implements AuthStates {}
 
 class LogOutSuccessState implements AuthStates {}
+
+//! Is Logged In
+class IsLoggedInErrorState implements AuthStates {
+  final String message;
+  IsLoggedInErrorState(this.message);
+}
+
+class IsLoggedInLoadingState implements AuthStates {}
+
+class IsLoggedInSuccessState implements AuthStates {}

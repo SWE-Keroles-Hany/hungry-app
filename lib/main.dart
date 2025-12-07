@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hungry_app/core/bloc/bloc_observer.dart';
 import 'package:hungry_app/core/routes/app_routes.dart';
 import 'package:hungry_app/core/service_locator/get_it.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:hungry_app/features/auth/presentation/screens/login_screen.dart';
+import 'package:hungry_app/features/home/presentation/cubit/categories_cubit.dart';
+import 'package:hungry_app/features/home/presentation/cubit/products_cubit.dart';
+import 'package:hungry_app/features/home/presentation/screens/home_screen.dart';
+import 'package:hungry_app/splash_screen.dart';
 import 'package:toastification/toastification.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
 
   setUp();
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => getIt<AuthCubit>())],
+      providers: [
+        BlocProvider(create: (_) => getIt<AuthCubit>()..isLoggedIn()),
+        BlocProvider(
+          create: (_) => getIt<CategoriesCubit>()..getAllCategorires(),
+        ),
+        BlocProvider(
+          create: (_) => getIt<ProductsCubit>()..getProductsByCategory(),
+        ),
+      ],
       child: const HungryApp(),
     ),
   );
@@ -30,7 +43,7 @@ class HungryApp extends StatelessWidget {
         child: MaterialApp(
           theme: AppTheme.theme,
           debugShowCheckedModeBanner: false,
-          initialRoute: LoginScreen.routeName,
+          initialRoute: SplashScreen.routeName,
           routes: AppRoutes.routes,
         ),
       ),

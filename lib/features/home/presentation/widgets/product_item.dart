@@ -14,7 +14,7 @@ class ProductItem extends StatelessWidget {
   });
   final String title;
   final String description;
-  final int rate;
+  final String rate;
   final TextTheme textTheme;
   final String imgURL;
 
@@ -51,14 +51,17 @@ class ProductItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(imgURL),
+          Center(child: Image.network(imgURL, height: 100.h, width: 100)),
           SizedBox(height: 5.h),
           Text(
             title,
+            maxLines: 1,
             style: textTheme.labelSmall!.copyWith(color: AppTheme.darkBrown),
           ),
           Text(
             description,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
             style: textTheme.labelSmall!.copyWith(
               color: AppTheme.darkBrown,
               fontWeight: FontWeight.w500,
@@ -72,7 +75,7 @@ class ProductItem extends StatelessWidget {
               Icon(Icons.star, color: Colors.orange),
               SizedBox(width: 2.w),
               Text(
-                "$rate",
+                rate,
                 style: textTheme.labelSmall!.copyWith(
                   color: AppTheme.darkBrown,
                   fontWeight: FontWeight.w500,

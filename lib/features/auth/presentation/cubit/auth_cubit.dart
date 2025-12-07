@@ -3,6 +3,7 @@ import 'package:hungry_app/features/auth/data/mappers/login_entity_mapper.dart';
 import 'package:hungry_app/features/auth/data/mappers/sign_up_entity_mapper.dart';
 import 'package:hungry_app/features/auth/domain/entities/login_entity.dart';
 import 'package:hungry_app/features/auth/domain/entities/sign_up_entity.dart';
+import 'package:hungry_app/features/auth/domain/use_cases/is_logged_in.dart';
 import 'package:hungry_app/features/auth/domain/use_cases/login.dart';
 import 'package:hungry_app/features/auth/domain/use_cases/logout.dart';
 import 'package:hungry_app/features/auth/domain/use_cases/sign_up.dart';
@@ -12,15 +13,17 @@ class AuthCubit extends Cubit<AuthStates> {
   final Login _login;
   final SignUp _signUp;
   final Logout _logout;
+  final IsLoggedIn _isLoggedIn;
 
-  AuthCubit(this._login, this._signUp, this._logout) : super(AuthIntialState());
+  AuthCubit(this._login, this._signUp, this._logout, this._isLoggedIn)
+    : super(AuthIntialState());
 
   Future<void> login({required LoginEntity loginEntity}) async {
     emit(LoginLoadingState());
     final result = await _login.login(loginModel: loginEntity.toModel);
     result.fold(
-      (failure) {
-        emit(LoginErrorState(failure.message));
+      (exception) {
+        emit(LoginErrorState(exception.message));
       },
       (_) {
         emit(LoginSuccessState());
@@ -32,8 +35,8 @@ class AuthCubit extends Cubit<AuthStates> {
     emit(SignUpLoadingState());
     final result = await _signUp.signUp(signUpModel: signUpEntity.toModel);
     result.fold(
-      (failure) {
-        emit(SignUpErrorState(failure.message));
+      (exception) {
+        emit(SignUpErrorState(exception.message));
       },
       (_) {
         emit(SignUpSuccessState());
@@ -45,11 +48,24 @@ class AuthCubit extends Cubit<AuthStates> {
     emit(LogOutLoadingState());
     final result = await _logout.logout();
     result.fold(
-      (failure) {
-        emit(LogOutErrorState(failure.message));
+      (exception) {
+        emit(LogOutErrorState(exception.message));
       },
       (_) {
         emit(LogOutSuccessState());
+      },
+    );
+  }
+
+  Future<void> isLoggedIn() async {
+    emit(IsLoggedInLoadingState());
+    final result = await _isLoggedIn.isLoggedIn();
+    result.fold(
+      (exception) {
+        emit(IsLoggedInErrorState(exception.message));
+      },
+      (_) {
+        emit(IsLoggedInSuccessState());
       },
     );
   }

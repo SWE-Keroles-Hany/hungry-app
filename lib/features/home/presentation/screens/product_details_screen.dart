@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
+import 'package:hungry_app/features/home/domain/entities/product_entity.dart';
 import 'package:hungry_app/features/home/presentation/widgets/custom_slider.dart';
 import 'package:hungry_app/features/home/presentation/widgets/side_option_item.dart';
 import 'package:hungry_app/features/home/presentation/widgets/side_options_title.dart';
@@ -17,7 +18,10 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    final product = ModalRoute.of(context)!.settings.arguments as ProductEntity;
     final textTheme = Theme.of(context).textTheme;
+    final width = MediaQuery.of(context).size.width;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(),
@@ -28,14 +32,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             children: [
               Row(
                 children: [
-                  Expanded(child: Image.asset("assets/icons/pngwing.png")),
+                  Image.network(product.image ?? "", width: width * 0.45),
                   SizedBox(width: 30.w),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Customize Your Burger to Your Tastes. Ultimate Experience",
+                          product.name ?? "",
                           style: textTheme.labelMedium!.copyWith(
                             fontWeight: FontWeight.w400,
                             color: AppTheme.primaryColor,
@@ -76,7 +80,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   itemCount: 10,
                 ),
               ),
-              SizedBox(height: 10.h),
+              Spacer(),
 
               TotalPriceWithAction(
                 width: 200,
