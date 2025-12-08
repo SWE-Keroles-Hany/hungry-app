@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:hungry_app/core/error/app_exceptions.dart';
 import 'package:hungry_app/features/home/domain/entities/categories_entity.dart';
+import 'package:hungry_app/features/home/domain/entities/product_options_entity.dart';
 import 'package:hungry_app/features/home/domain/entities/products_entity.dart';
 
 abstract class ProductsRepository {
@@ -9,4 +10,6 @@ abstract class ProductsRepository {
     String? name,
     int? categoryId,
   });
+  Future<Either<AppException, ProductOptionsEntity>> getSideOptions();
+  Future<Either<AppException, ProductOptionsEntity>> getToppings();
 }

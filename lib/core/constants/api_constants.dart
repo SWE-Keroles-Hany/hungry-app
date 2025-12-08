@@ -5,4 +5,6 @@ class APIConstants {
   static const String signUp = "/register";
   static const String categories = "/categories";
   static const String products = "/products";
+  static const String toppings = "/toppings";
+  static const String sideOptions = "/side-options";
 }

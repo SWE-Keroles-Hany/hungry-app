@@ -1,10 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 
 class SideOptionItem extends StatelessWidget {
-  const SideOptionItem({required this.addIcon, super.key});
+  const SideOptionItem({
+    required this.addIcon,
+    super.key,
+    required this.name,
+    required this.imgURL,
+  });
   final String addIcon;
+  final String name;
+  final String imgURL;
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +60,9 @@ class SideOptionItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      "Tomato",
+                      name,
                       style: textTheme.labelSmall!.copyWith(
-                        fontSize: 14.sp,
+                        fontSize: 16.sp,
                         color: AppTheme.white,
                       ),
                     ),
@@ -69,6 +77,7 @@ class SideOptionItem extends StatelessWidget {
           // margin: EdgeInsets.only(bottom: ),
           padding: EdgeInsets.all(12.r),
           width: width * 0.25,
+          height: 85.h,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -92,7 +101,7 @@ class SideOptionItem extends StatelessWidget {
             // border: Border.all(),
             borderRadius: BorderRadius.circular(15.sp),
           ),
-          child: Image.asset("assets/icons/tp.png"),
+          child: CachedNetworkImage(imageUrl: imgURL),
         ),
       ],
     );

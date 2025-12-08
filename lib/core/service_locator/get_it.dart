@@ -22,6 +22,8 @@ import 'package:hungry_app/features/home/domain/repository/categories_repository
 import 'package:hungry_app/features/home/domain/repository/products_repository_imp.dart';
 import 'package:hungry_app/features/home/domain/use_cases/get_all_categories.dart';
 import 'package:hungry_app/features/home/domain/use_cases/get_products_by_name.dart';
+import 'package:hungry_app/features/home/domain/use_cases/get_side_options_products.dart';
+import 'package:hungry_app/features/home/domain/use_cases/get_toppings_products.dart';
 import 'package:hungry_app/features/home/presentation/cubit/categories_cubit.dart';
 import 'package:hungry_app/features/home/presentation/cubit/products_cubit.dart';
 
@@ -57,6 +59,13 @@ void setUp() {
   );
   getIt.registerSingleton<GetAllCategories>(GetAllCategories(getIt()));
   getIt.registerSingleton<GetProducts>(GetProducts(getIt()));
-  getIt.registerFactory<ProductsCubit>(() => ProductsCubit(getIt()));
+  getIt.registerSingleton<GetSideOptionsProducts>(
+    GetSideOptionsProducts(getIt()),
+  );
+  getIt.registerSingleton<GetToppingsProducts>(GetToppingsProducts(getIt()));
+
+  getIt.registerFactory<ProductsCubit>(
+    () => ProductsCubit(getIt(), getIt(), getIt()),
+  );
   getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
 }
