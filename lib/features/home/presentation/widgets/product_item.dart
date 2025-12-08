@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
@@ -51,7 +52,14 @@ class ProductItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(child: Image.network(imgURL, height: 100.h, width: 100)),
+          Center(
+            child: CachedNetworkImage(
+              imageUrl: imgURL,
+              height: 100.h,
+              width: 100.w,
+            ),
+          ),
+          // Center(child: Image.network(imgURL, )),
           SizedBox(height: 5.h),
           Text(
             title,

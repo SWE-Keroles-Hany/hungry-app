@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
+import 'package:hungry_app/features/home/presentation/cubit/products_cubit.dart';
 
-class SearchTextForm extends StatelessWidget {
+class SearchTextForm extends StatefulWidget {
   const SearchTextForm({super.key});
 
+  @override
+  State<SearchTextForm> createState() => _SearchTextFormState();
+}
+
+class _SearchTextFormState extends State<SearchTextForm> {
+  final TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -31,13 +39,18 @@ class SearchTextForm extends StatelessWidget {
         ],
       ),
       child: TextField(
+        onChanged: (value) async {
+          await BlocProvider.of<ProductsCubit>(
+            context,
+          ).getProducts(name: value, categoryId: 1);
+        },
+        controller: controller,
         cursorColor: AppTheme.darkBrown,
         cursorRadius: Radius.circular(2.r),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 18.h),
           fillColor: AppTheme.white,
           filled: true,
-
           hint: Text(
             "Search",
             style: textTheme.labelMedium!.copyWith(color: AppTheme.darkBrown),

@@ -8,34 +8,41 @@ class ProductsAPIDataSource implements ProductsDataSource {
   final DioService dio;
   ProductsAPIDataSource(this.dio);
   @override
-  Future<ProductsModel> getProductsByCategory({int? categoryId}) async {
-    try {
-      if (categoryId == null || categoryId == 0) {
-        final response = await dio.get(endPoint: APIConstants.products);
-        return ProductsModel.fromJson(response);
-      } else {
-        final response = await dio.get(
-          endPoint: APIConstants.products,
-          queryParams: {'category_id': categoryId},
-        );
-        return ProductsModel.fromJson(response);
-      }
-    } on AppException catch (exception) {
-      throw AppException(exception.message);
-    }
-  }
-
-  //! Search
   @override
-  Future<ProductsModel> getProductsByName({String? name}) async {
+  Future<ProductsModel> getProducts({int? categoryId, String? name}) async {
     try {
+      final Map<String, dynamic> params = {};
+
+      if (categoryId != null) {
+        params['category_id'] = categoryId;
+      }
+
+      if (name != null) {
+        params['name'] = name;
+      }
+
       final response = await dio.get(
         endPoint: APIConstants.products,
-        queryParams: {'name': name},
+        queryParams: params.isEmpty ? null : params,
       );
+      print(response);
       return ProductsModel.fromJson(response);
     } on AppException catch (exception) {
       throw AppException(exception.message);
     }
   }
+
+  // //! Search
+  // @override
+  // Future<ProductsModel> getProductsByName({String? name}) async {
+  //   try {
+  //     final response = await dio.get(
+  //       endPoint: APIConstants.products,
+  //       queryParams: {'name': name},
+  //     );
+  //     return ProductsModel.fromJson(response);
+  //   } on AppException catch (exception) {
+  //     throw AppException(exception.message);
+  //   }
+  // }
 }

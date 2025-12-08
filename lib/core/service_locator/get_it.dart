@@ -21,12 +21,9 @@ import 'package:hungry_app/features/home/data/repository/products_repository.dar
 import 'package:hungry_app/features/home/domain/repository/categories_repository_imp.dart';
 import 'package:hungry_app/features/home/domain/repository/products_repository_imp.dart';
 import 'package:hungry_app/features/home/domain/use_cases/get_all_categories.dart';
-import 'package:hungry_app/features/home/domain/use_cases/get_products_by_category.dart';
 import 'package:hungry_app/features/home/domain/use_cases/get_products_by_name.dart';
 import 'package:hungry_app/features/home/presentation/cubit/categories_cubit.dart';
 import 'package:hungry_app/features/home/presentation/cubit/products_cubit.dart';
-import 'package:hungry_app/features/home/presentation/cubit/products_states.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final getIt = GetIt.instance;
 void setUp() {
@@ -59,10 +56,7 @@ void setUp() {
     ProductsRepositoryImp(getIt(), getIt()),
   );
   getIt.registerSingleton<GetAllCategories>(GetAllCategories(getIt()));
-  getIt.registerSingleton<GetProductsByName>(GetProductsByName(getIt()));
-  getIt.registerSingleton<GetProductsByCategory>(
-    GetProductsByCategory(getIt()),
-  );
-  getIt.registerFactory<ProductsCubit>(() => ProductsCubit(getIt(), getIt()));
+  getIt.registerSingleton<GetProducts>(GetProducts(getIt()));
+  getIt.registerFactory<ProductsCubit>(() => ProductsCubit(getIt()));
   getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
 }

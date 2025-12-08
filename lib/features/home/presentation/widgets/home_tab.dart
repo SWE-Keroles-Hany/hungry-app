@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hungry_app/core/service_locator/get_it.dart';
-import 'package:hungry_app/features/home/presentation/cubit/products_cubit.dart';
 import 'package:hungry_app/features/home/presentation/widgets/home_header.dart';
 import 'package:hungry_app/features/home/presentation/widgets/product_list.dart';
 import 'package:hungry_app/features/home/presentation/widgets/product_tabs.dart';

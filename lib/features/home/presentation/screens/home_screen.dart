@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hungry_app/core/service_locator/get_it.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/cart/presentation/widgets/cart_tab.dart';
-import 'package:hungry_app/features/home/presentation/cubit/products_cubit.dart';
 import 'package:hungry_app/features/home/presentation/widgets/home_tab.dart';
 import 'package:hungry_app/features/order_history/presentation/widgets/order_history_tab.dart';
 import 'package:hungry_app/features/profile/presentation/screens/profile_tab.dart';

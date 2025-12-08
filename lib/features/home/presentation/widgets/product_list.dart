@@ -16,11 +16,13 @@ class ProductList extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return BlocBuilder<ProductsCubit, ProductsStates>(
       builder: (context, state) {
-        if (state is LoadingGetProductsByCategoryState) {
+        if (state is LoadingGetProductsState) {
           return UiUtils.showLoaidng();
-        } else if (state is ErrorGetProductsByCategoryState) {
+        } else if (state is ErrorGetProductsState) {
           return Center(child: Text(state.message));
-        } else if (state is SuccessGetProductsByCategoryState) {
+        } else if (state is SuccessGetProductsState && state.products.isEmpty) {
+          return Center(child: Text("No Products"));
+        } else if (state is SuccessGetProductsState) {
           final allProducts = state.products;
           return Expanded(
             child: GridView.builder(

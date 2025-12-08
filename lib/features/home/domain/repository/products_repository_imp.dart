@@ -13,25 +13,15 @@ class ProductsRepositoryImp implements ProductsRepository {
   final CategoriesDataSource _categoriesDataSource;
   ProductsRepositoryImp(this._categoriesDataSource, this._productsDataSource);
   @override
-  Future<Either<AppException, ProductsEntity>> getProductsByCategory({
+  Future<Either<AppException, ProductsEntity>> getProducts({
     int? categoryId,
+    String? name,
   }) async {
     try {
-      final result = await _productsDataSource.getProductsByCategory(
+      final result = await _productsDataSource.getProducts(
+        name: name,
         categoryId: categoryId,
       );
-      return Right(result.toEntity);
-    } on AppException catch (exception) {
-      return Left(AppException(exception.message));
-    }
-  }
-
-  @override
-  Future<Either<AppException, ProductsEntity>> getProductsByName({
-    required String name,
-  }) async {
-    try {
-      final result = await _productsDataSource.getProductsByName(name: name);
       return Right(result.toEntity);
     } on AppException catch (exception) {
       return Left(AppException(exception.message));

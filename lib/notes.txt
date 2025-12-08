@@ -1,0 +1,4 @@
+1- retrofit 
+2- getIt --> annotations 
+3- states in cubit 
+4- search within tabs selected 

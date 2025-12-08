@@ -4,7 +4,6 @@ import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/home/presentation/cubit/categories_cubit.dart';
 import 'package:hungry_app/features/home/presentation/cubit/categories_states.dart';
 import 'package:hungry_app/features/home/presentation/cubit/products_cubit.dart';
-import 'package:hungry_app/features/home/presentation/cubit/products_states.dart';
 import 'package:hungry_app/features/home/presentation/widgets/tab_item.dart';
 
 class ProductTabs extends StatefulWidget {
@@ -46,9 +45,15 @@ class _ProductTabsState extends State<ProductTabs> {
                     setState(() {
                       selectedTab = index;
                     });
-                    await BlocProvider.of<ProductsCubit>(
-                      context,
-                    ).getProductsByCategory(categoryId: selectedTab);
+                    if (selectedTab == 0) {
+                      await BlocProvider.of<ProductsCubit>(
+                        context,
+                      ).getProducts();
+                    } else {
+                      await BlocProvider.of<ProductsCubit>(
+                        context,
+                      ).getProducts(categoryId: selectedTab);
+                    }
                   },
                   child: TabItem(
                     titleColor: selectedTab == index
