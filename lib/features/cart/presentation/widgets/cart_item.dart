@@ -1,15 +1,29 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/auth/presentation/widgets/custom_button.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({super.key});
+  const CartItem({
+    super.key,
+    required this.onMinusPressed,
+    required this.onPlusPressed,
+    required this.onRemove,
+    required this.name,
+    required this.imgURL,
+    required this.quntity,
+  });
+  final String name;
+  final String imgURL;
+  final int quntity;
+  final void Function()? onRemove;
+  final void Function()? onPlusPressed;
+  final void Function()? onMinusPressed;
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final height = MediaQuery.sizeOf(context).height;
     return Container(
       padding: EdgeInsets.all(30.r),
       decoration: BoxDecoration(
@@ -41,18 +55,11 @@ class CartItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset("assets/images/image.png", width: 110),
+                CachedNetworkImage(imageUrl: imgURL, width: 110.w),
                 SizedBox(height: 8.h),
                 Text(
-                  "Hamburger",
+                  name,
                   style: textTheme.labelMedium!.copyWith(
-                    color: AppTheme.darkBrown,
-                  ),
-                ),
-                Text(
-                  "Veggie Burger",
-                  style: textTheme.labelMedium!.copyWith(
-                    fontWeight: FontWeight.w500,
                     color: AppTheme.darkBrown,
                   ),
                 ),
@@ -64,31 +71,20 @@ class CartItem extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Image.asset("assets/icons/minus_icon.png"),
-                    ),
-                    Text(
-                      "1",
-                      style: textTheme.labelLarge!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppTheme.black,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Image.asset("assets/icons/plus_icon.png"),
-                    ),
-                  ],
+                //     ),
+                Text(
+                  "Quntity : ( $quntity )",
+                  style: textTheme.labelLarge!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppTheme.black,
+                  ),
                 ),
+
                 SizedBox(height: 25.h),
                 CustomButton(
                   width: 155,
                   radiusNumber: 30,
-                  onPressed: () {},
+                  onPressed: onRemove,
                   title: "Remove",
                   titleColor: AppTheme.white,
                   bgColor: AppTheme.primaryColor,

@@ -14,7 +14,7 @@ class TotalPriceWithAction extends StatelessWidget {
   });
   final Function()? onPressed;
   final String title;
-  final double totalPrice;
+  final String totalPrice;
   final double width;
 
   @override

@@ -2,3 +2,18 @@
 2- getIt --> annotations 
 3- states in cubit 
 4- search within tabs selected 
+5- permormance , fast ...
+6- add more than one product in cart 
+7- more understate : 
+   return BlocConsumer<CartCubit, CartStates>
+      listenWhen: (previous, current) {
+        return current is LoadingDeleteFromCartState ||
+            current is SuccessDeleteFromCartState ||
+            current is ErrorDeleteFromCartState;
+      },
+
+      buildWhen: (previous, current) {
+        return current is LoadingGetCartState ||
+            current is SuccessGetCartState ||
+            current is ErrorGetCartState;
+      },

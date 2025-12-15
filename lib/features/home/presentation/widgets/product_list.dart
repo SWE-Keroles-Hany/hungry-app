@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hungry_app/core/utils/ui_utils.dart';
+import 'package:hungry_app/core/helper/app_helper.dart';
 import 'package:hungry_app/features/home/presentation/cubit/products_cubit.dart';
 import 'package:hungry_app/features/home/presentation/cubit/products_states.dart';
 import 'package:hungry_app/features/home/presentation/screens/product_details_screen.dart';
 import 'package:hungry_app/features/home/presentation/widgets/product_item.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductList extends StatelessWidget {
   const ProductList({super.key});
@@ -17,7 +18,21 @@ class ProductList extends StatelessWidget {
     return BlocBuilder<ProductsCubit, ProductsStates>(
       builder: (context, state) {
         if (state is LoadingGetProductsState) {
-          return UiUtils.showLoaidng();
+          return Expanded(
+            child: Skeletonizer(
+              child: GridView(
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisSpacing: 15.r,
+                  mainAxisSpacing: 15.r,
+                  mainAxisExtent: height * 0.25,
+                  crossAxisCount: 2,
+                ),
+                children: getDummyProducts(),
+              ),
+            ),
+          );
         } else if (state is ErrorGetProductsState) {
           return Center(child: Text(state.message));
         } else if (state is SuccessGetProductsState && state.products.isEmpty) {
@@ -46,7 +61,6 @@ class ProductList extends StatelessWidget {
                     imgURL:
                         allProducts[index].image ??
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdpU431xPGZoWC2RW7DAlWe29mnpo2z5m13Q&s",
-                    textTheme: textTheme,
                     description: allProducts[index].description ?? "",
                     rate: allProducts[index].rating ?? "",
                     title: allProducts[index].name ?? "",

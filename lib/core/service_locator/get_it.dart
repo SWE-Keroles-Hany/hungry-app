@@ -12,6 +12,13 @@ import 'package:hungry_app/features/auth/domain/use_cases/login.dart';
 import 'package:hungry_app/features/auth/domain/use_cases/logout.dart';
 import 'package:hungry_app/features/auth/domain/use_cases/sign_up.dart';
 import 'package:hungry_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:hungry_app/features/cart/data/data_source/cart_api_data_source.dart';
+import 'package:hungry_app/features/cart/data/repository/cart_repository.dart';
+import 'package:hungry_app/features/cart/domain/repository/cart_repository_imp.dart';
+import 'package:hungry_app/features/cart/domain/use_cases/add_to_cart.dart';
+import 'package:hungry_app/features/cart/domain/use_cases/delete_from_cart.dart';
+import 'package:hungry_app/features/cart/domain/use_cases/get_cart.dart';
+import 'package:hungry_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:hungry_app/features/home/data/data_source/categories_api_data_source.dart';
 import 'package:hungry_app/features/home/data/data_source/categories_data_source.dart';
 import 'package:hungry_app/features/home/data/data_source/products_api_data_source.dart';
@@ -43,8 +50,8 @@ void setUp() {
   getIt.registerSingleton<SignUp>(SignUp(getIt()));
   getIt.registerSingleton<IsLoggedIn>(IsLoggedIn(getIt()));
 
-  getIt.registerSingleton<AuthCubit>(
-    AuthCubit(getIt(), getIt(), getIt(), getIt()),
+  getIt.registerLazySingleton<AuthCubit>(
+    () => AuthCubit(getIt(), getIt(), getIt(), getIt()),
   );
   //! Products & Categoires
   getIt.registerSingleton<ProductsDataSource>(ProductsAPIDataSource(getIt()));
@@ -68,4 +75,15 @@ void setUp() {
     () => ProductsCubit(getIt(), getIt(), getIt()),
   );
   getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
+
+  //! cart
+
+  getIt.registerSingleton<CartAPIDataSource>(CartAPIDataSource(getIt()));
+  getIt.registerSingleton<CartRepository>(CartRepositoryImp(getIt()));
+  getIt.registerSingleton<AddToCart>(AddToCart(getIt()));
+
+  getIt.registerSingleton<DeleteFromCart>(DeleteFromCart(getIt()));
+
+  getIt.registerSingleton<GetCart>(GetCart(getIt()));
+  getIt.registerFactory<CartCubit>(() => CartCubit(getIt(), getIt(), getIt()));
 }

@@ -46,6 +46,7 @@ dependencies:
   toastification: ^3.0.3
   widget_loading: ^0.4.0
   cached_network_image: ^3.4.1
+  skeletonizer: ^2.1.1
 
 dev_dependencies:
   flutter_test:

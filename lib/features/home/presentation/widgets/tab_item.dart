@@ -4,18 +4,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class TabItem extends StatelessWidget {
   const TabItem({
     super.key,
-    required this.textTheme,
     required this.title,
-    required this.bgColor,
-    required this.titleColor,
+    this.bgColor,
+    this.titleColor,
   });
-  final TextTheme textTheme;
   final String title;
-  final Color bgColor;
-  final Color titleColor;
+  final Color? bgColor;
+  final Color? titleColor;
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Container(
       height: 45.h,
       padding: EdgeInsets.symmetric(horizontal: 30.w),

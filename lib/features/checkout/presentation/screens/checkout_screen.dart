@@ -72,7 +72,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               Spacer(),
               TotalPriceWithAction(
                 width: MediaQuery.sizeOf(context).width * 0.5,
-                totalPrice: 18,
+                totalPrice: "18",
                 title: "Pay Now",
                 onPressed: () {},
               ),

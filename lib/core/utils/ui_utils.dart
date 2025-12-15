@@ -13,7 +13,10 @@ class UiUtils {
   }) {
     toastification.show(
       autoCloseDuration: const Duration(seconds: 3),
-      title: Text(message, style: TextStyle(fontSize: 18.sp)),
+      title: Text(
+        message,
+        style: TextStyle(color: AppTheme.white, fontSize: 18.sp),
+      ),
       // progressBarTheme: true,
       alignment: Alignment.topRight,
       direction: TextDirection.ltr,
@@ -79,7 +82,6 @@ class UiUtils {
         padding: const EdgeInsets.all(8.0),
         child: CircularWidgetLoading(
           // appearingDuration: Duration(seconds: 5),
-          
           dotColor: AppTheme.primaryColor,
           dotCount: 100,
           animating: true,

@@ -4,7 +4,7 @@ import 'package:hungry_app/core/theme/app_theme.dart';
 
 class TotalPrice extends StatelessWidget {
   const TotalPrice({super.key, required this.totalPrice});
-  final double totalPrice;
+  final String totalPrice;
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,6 @@ import 'package:hungry_app/core/theme/app_theme.dart';
 class ProductItem extends StatelessWidget {
   const ProductItem({
     super.key,
-    required this.textTheme,
     required this.description,
     required this.rate,
     required this.imgURL,
@@ -16,11 +15,11 @@ class ProductItem extends StatelessWidget {
   final String title;
   final String description;
   final String rate;
-  final TextTheme textTheme;
   final String imgURL;
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     final width = MediaQuery.sizeOf(context).width;
 
     return Container(

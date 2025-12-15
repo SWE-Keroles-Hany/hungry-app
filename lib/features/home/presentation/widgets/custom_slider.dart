@@ -2,15 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 
-class CustomSlider extends StatefulWidget {
-  const CustomSlider({super.key});
-
-  @override
-  State<CustomSlider> createState() => _CustomSliderState();
-}
-
-class _CustomSliderState extends State<CustomSlider> {
-  double spicyValue = 0.0;
+class CustomSlider extends StatelessWidget {
+  final Function(double)? onChanged;
+  final double value;
+  const CustomSlider({super.key, required this.onChanged, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +27,8 @@ class _CustomSliderState extends State<CustomSlider> {
           max: 1.0,
           min: 0.0,
           padding: EdgeInsets.all(4.r),
-          value: spicyValue,
-          onChanged: (value) {
-            spicyValue = value;
-            setState(() {});
-          },
+          value: value,
+          onChanged: onChanged,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

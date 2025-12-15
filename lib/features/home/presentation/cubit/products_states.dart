@@ -1,6 +1,5 @@
 import 'package:hungry_app/features/home/domain/entities/product_entity.dart';
 import 'package:hungry_app/features/home/domain/entities/product_option_entity.dart';
-import 'package:hungry_app/features/home/domain/entities/product_options_entity.dart';
 
 abstract class ProductsStates {}
 

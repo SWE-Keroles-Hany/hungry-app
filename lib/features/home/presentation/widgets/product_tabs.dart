@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hungry_app/core/helper/app_helper.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/home/presentation/cubit/categories_cubit.dart';
 import 'package:hungry_app/features/home/presentation/cubit/categories_states.dart';
 import 'package:hungry_app/features/home/presentation/cubit/products_cubit.dart';
 import 'package:hungry_app/features/home/presentation/widgets/tab_item.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductTabs extends StatefulWidget {
   const ProductTabs({super.key});
@@ -27,9 +29,14 @@ class _ProductTabsState extends State<ProductTabs> {
       child: BlocBuilder<CategoriesCubit, CategoriesStates>(
         builder: (context, state) {
           if (state is LoadingGetAllCategoriesState) {
-            return Center(
-              child: CircularProgressIndicator(
-                backgroundColor: AppTheme.primaryColor,
+            return Skeletonizer(
+              child: SizedBox(
+                child: Row(
+                  children: List.generate(
+                    getDummyProducts().length,
+                    (index) => TabItem(title: "AAAAA"),
+                  ),
+                ),
               ),
             );
           } else if (state is ErrorGetAllCategoriesState) {
@@ -46,20 +53,17 @@ class _ProductTabsState extends State<ProductTabs> {
                       selectedTab = index;
                     });
                     if (selectedTab == 0) {
-                      await BlocProvider.of<ProductsCubit>(
-                        context,
-                      ).getProducts();
+                      await context.read<ProductsCubit>().getProducts();
                     } else {
-                      await BlocProvider.of<ProductsCubit>(
-                        context,
-                      ).getProducts(categoryId: selectedTab);
+                      await context.read<ProductsCubit>().getProducts(
+                        categoryId: selectedTab,
+                      );
                     }
                   },
                   child: TabItem(
                     titleColor: selectedTab == index
                         ? AppTheme.white
                         : AppTheme.mediumGray,
-                    textTheme: textTheme,
                     title: allCategories[index].name ?? "",
                     bgColor: selectedTab == index
                         ? AppTheme.primaryColor
