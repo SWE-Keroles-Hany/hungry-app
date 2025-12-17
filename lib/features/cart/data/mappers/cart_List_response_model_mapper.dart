@@ -6,5 +6,6 @@ extension CartListResponseModelMapper on CartListResponseModel {
   CartListResponseEntity get toEntity => CartListResponseEntity(
     items: items?.map((item) => item.toEntity).toList(),
     totalPrice: totalPrice,
+    id: id,
   );
 }

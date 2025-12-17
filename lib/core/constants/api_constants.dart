@@ -10,4 +10,5 @@ class APIConstants {
   static const String addToCart = "/cart/add";
   static const String cart = "/cart";
   static const String removeFromCart = "/cart/remove";
+  static const String orders = "/orders";
 }

@@ -1,7 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
-import 'package:hungry_app/features/auth/presentation/widgets/custom_button.dart';
 
 class OrderHistoryItem extends StatelessWidget {
   const OrderHistoryItem({
@@ -16,7 +16,7 @@ class OrderHistoryItem extends StatelessWidget {
   final String imgURL;
   final String title;
   final int quantity;
-  final double price;
+  final String price;
   final Function()? onPressed;
 
   @override
@@ -65,22 +65,23 @@ class OrderHistoryItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(imgURL, width: 100.w),
+              CachedNetworkImage(imageUrl: imgURL, width: 100.w),
 
+              // Image.asset(imgURL, width: 100.w),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: textTheme.labelMedium!.copyWith(
-                      color: AppTheme.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  // Text(
+                  //   title,
+                  //   style: textTheme.labelMedium!.copyWith(
+                  //     color: AppTheme.black,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
                   Row(
                     children: [
                       Text(
-                        "Qty : ",
+                        "Quntity : ",
                         style: textTheme.labelMedium!.copyWith(
                           color: AppTheme.black,
                           fontWeight: FontWeight.normal,
@@ -117,14 +118,14 @@ class OrderHistoryItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 25.h),
-          CustomButton(
-            onPressed: onPressed,
-            title: "Order Again",
-            titleColor: AppTheme.white,
-            bgColor: const Color.fromARGB(255, 161, 161, 161),
-            width: double.infinity,
-          ),
+          // SizedBox(height: 25.h),
+          // CustomButton(
+          //   onPressed: onPressed,
+          //   title: "Order Again",
+          //   titleColor: AppTheme.white,
+          //   bgColor: const Color.fromARGB(255, 161, 161, 161),
+          //   width: double.infinity,
+          // ),
         ],
       ),
     );

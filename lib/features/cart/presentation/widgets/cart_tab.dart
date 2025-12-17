@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,7 +58,7 @@ class CartTab extends StatelessWidget {
             ),
           );
         } else if (state is LoadingGetCartState) {
-          return UiUtils.showLoaidng();
+          return Center(child: UiUtils.showLoaidng());
         } else if (state is SuccessGetCartState &&
             state.cartList.items!.isEmpty) {
           return Center(
@@ -106,16 +105,9 @@ class _CartListAndTotalPriceState extends State<CartListAndTotalPrice> {
               int quntity = widget.cart.items![index].quantity!;
 
               return CartItem(
-                onPlusPressed: () {
-                  log("on Plus Pressed");
-                  quntity = quntity + 1;
-
-                  log("*==>>$quntity");
-                },
-
+                price: widget.cart.items![index].price!,
                 onRemove: () async {
                   final itemId = widget.cart.items?[index].itemId;
-
                   if (itemId == null) {
                     UiUtils.showMessage(
                       message: "Some Thing Went Wrong",
@@ -129,15 +121,7 @@ class _CartListAndTotalPriceState extends State<CartListAndTotalPrice> {
                     );
                   }
                 },
-                onMinusPressed: () {
-                  log("on Minus Pressed");
-                  if (quntity == 0) {
-                    return;
-                  }
-                  quntity--;
 
-                  log("$quntity");
-                },
                 quntity: quntity,
                 imgURL: widget.cart.items![index].image!,
                 name: widget.cart.items![index].name!,
@@ -148,8 +132,9 @@ class _CartListAndTotalPriceState extends State<CartListAndTotalPrice> {
         SizedBox(height: 10),
         TotalPriceWithAction(
           width: 200,
-          onPressed: () =>
-              Navigator.of(context).pushNamed(CheckoutScreen.routeName),
+          onPressed: () => Navigator.of(
+            context,
+          ).pushNamed(CheckoutScreen.routeName, arguments: widget.cart),
           totalPrice: widget.cart.totalPrice!,
           title: "Checkout",
         ),

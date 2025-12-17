@@ -8,7 +8,7 @@ class OrderLabelWithPrice extends StatelessWidget {
     required this.title,
   });
   final String title;
-  final double price;
+  final String price;
 
   @override
   Widget build(BuildContext context) {

@@ -33,6 +33,13 @@ import 'package:hungry_app/features/home/domain/use_cases/get_side_options_produ
 import 'package:hungry_app/features/home/domain/use_cases/get_toppings_products.dart';
 import 'package:hungry_app/features/home/presentation/cubit/categories_cubit.dart';
 import 'package:hungry_app/features/home/presentation/cubit/products_cubit.dart';
+import 'package:hungry_app/features/order_history/data/data_source/orders_api_data_source.dart';
+import 'package:hungry_app/features/order_history/data/data_source/orders_data_source.dart';
+import 'package:hungry_app/features/order_history/data/repository/orders_repository.dart';
+import 'package:hungry_app/features/order_history/domain/repository/orders_repository_imp.dart';
+import 'package:hungry_app/features/order_history/domain/use_cases/get_all_orders.dart';
+import 'package:hungry_app/features/order_history/domain/use_cases/save_order.dart';
+import 'package:hungry_app/features/order_history/presentation/cubit/orders_cubit.dart';
 
 final getIt = GetIt.instance;
 void setUp() {
@@ -86,4 +93,17 @@ void setUp() {
 
   getIt.registerSingleton<GetCart>(GetCart(getIt()));
   getIt.registerFactory<CartCubit>(() => CartCubit(getIt(), getIt(), getIt()));
+
+  //! orders
+  getIt.registerSingleton<OrdersDataSource>(OrdersAPIDataSource(getIt()));
+  getIt.registerSingleton<OrdersRepository>(OrdersRepositoryImp(getIt()));
+  getIt.registerSingleton<GetAllOrders>(GetAllOrders(getIt()));
+
+  getIt.registerSingleton<SaveOrder>(SaveOrder(getIt()));
+  getIt.registerFactory<OrdersCubit>(
+    () => OrdersCubit(
+      getIt(), // GetAllOrders
+      getIt(), // SaveOrder
+    ),
+  );
 }

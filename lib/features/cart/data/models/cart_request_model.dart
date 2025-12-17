@@ -13,11 +13,11 @@ class CartItemRequestModel {
   );
   Map<String, dynamic> toJson() {
     return {
-      'productId': productId,
+      'product_id': productId,
       'quantity': quantity,
       'spicy': spicy,
       'toppings': toppings,
-      'sideOptions': sideOptions,
+      'side_options': sideOptions,
     };
   }
 }

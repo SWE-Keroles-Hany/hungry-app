@@ -4,7 +4,7 @@ import 'package:hungry_app/core/theme/app_theme.dart';
 
 class OrderTotalWithPrice extends StatelessWidget {
   const OrderTotalWithPrice({super.key, required this.price});
-  final double price;
+  final String price;
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;

@@ -7,8 +7,8 @@ import 'package:hungry_app/features/auth/presentation/widgets/custom_button.dart
 class CartItem extends StatelessWidget {
   const CartItem({
     super.key,
-    required this.onMinusPressed,
-    required this.onPlusPressed,
+    required this.price,
+
     required this.onRemove,
     required this.name,
     required this.imgURL,
@@ -18,8 +18,7 @@ class CartItem extends StatelessWidget {
   final String imgURL;
   final int quntity;
   final void Function()? onRemove;
-  final void Function()? onPlusPressed;
-  final void Function()? onMinusPressed;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +54,11 @@ class CartItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CachedNetworkImage(imageUrl: imgURL, width: 110.w),
+                CachedNetworkImage(imageUrl: imgURL, width: 100.w),
                 SizedBox(height: 8.h),
                 Text(
                   name,
-                  style: textTheme.labelMedium!.copyWith(
+                  style: textTheme.labelSmall!.copyWith(
                     color: AppTheme.darkBrown,
                   ),
                 ),
@@ -69,12 +68,20 @@ class CartItem extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 //     ),
                 Text(
-                  "Quntity : ( $quntity )",
-                  style: textTheme.labelLarge!.copyWith(
+                  "Quntity: $quntity",
+                  style: textTheme.labelMedium!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppTheme.black,
+                  ),
+                ),
+                Text(
+                  "Price: $price \$",
+                  style: textTheme.labelMedium!.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppTheme.black,
                   ),
