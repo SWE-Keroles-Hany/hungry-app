@@ -17,7 +17,7 @@ class CartItemRequestModel {
       'quantity': quantity,
       'spicy': spicy,
       'toppings': toppings,
-      'side_options': sideOptions,
+      'sideOptions': sideOptions,
     };
   }
 }
