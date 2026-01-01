@@ -30,4 +30,17 @@ class SharedPrefDataSource implements LocalDataSource {
       throw AppException("Some Thing Went Wrong");
     }
   }
+
+  @override
+  Future<void> clearToken() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+
+    try {
+      final isSaved = await sharedPreferences.remove("token");
+      if (!isSaved) throw AppException("Some Thing Went Wrong");
+    } catch (e) {
+      log(e.toString());
+      throw AppException("Some Thing Went Wrong");
+    }
+  }
 }

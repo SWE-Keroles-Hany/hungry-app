@@ -9,10 +9,10 @@ class ProfilePicture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 130.w,
-      height: 130.h,
+      width: 150.w,
+      height: 150.h,
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(imgURL)),
+        image: DecorationImage(image: NetworkImage(imgURL)),
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: AppTheme.white, width: 8.w),
       ),

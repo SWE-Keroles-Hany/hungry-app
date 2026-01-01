@@ -40,6 +40,13 @@ import 'package:hungry_app/features/order_history/domain/repository/orders_repos
 import 'package:hungry_app/features/order_history/domain/use_cases/get_all_orders.dart';
 import 'package:hungry_app/features/order_history/domain/use_cases/save_order.dart';
 import 'package:hungry_app/features/order_history/presentation/cubit/orders_cubit.dart';
+import 'package:hungry_app/features/profile/data/data_source/profile_api_data_source.dart';
+import 'package:hungry_app/features/profile/data/data_source/profile_data_source.dart';
+import 'package:hungry_app/features/profile/data/repository/profile_repository.dart';
+import 'package:hungry_app/features/profile/domain/repository/profile_repository_imp.dart';
+import 'package:hungry_app/features/profile/domain/use_cases/get_profile.dart';
+import 'package:hungry_app/features/profile/domain/use_cases/update_profile.dart';
+import 'package:hungry_app/features/profile/presentation/cubit/profile_cubit.dart';
 
 final getIt = GetIt.instance;
 void setUp() {
@@ -60,27 +67,44 @@ void setUp() {
   getIt.registerLazySingleton<AuthCubit>(
     () => AuthCubit(getIt(), getIt(), getIt(), getIt()),
   );
-  //! Products & Categoires
-  getIt.registerSingleton<ProductsDataSource>(ProductsAPIDataSource(getIt()));
-  getIt.registerSingleton<CategoriesDataSource>(
-    CategoriesAPIDataSource(getIt()),
+  //! Products & Categories
+
+  //! Products & Categories
+
+  getIt.registerLazySingleton<ProductsDataSource>(
+    () => ProductsAPIDataSource(getIt()),
   );
-  getIt.registerSingleton<CategoriesRepository>(
-    CategoriesRepositoryImp(getIt()),
+
+  getIt.registerLazySingleton<CategoriesDataSource>(
+    () => CategoriesAPIDataSource(getIt()),
   );
-  getIt.registerSingleton<ProductsRepository>(
-    ProductsRepositoryImp(getIt(), getIt()),
+
+  getIt.registerLazySingleton<CategoriesRepository>(
+    () => CategoriesRepositoryImp(getIt()),
   );
-  getIt.registerSingleton<GetAllCategories>(GetAllCategories(getIt()));
-  getIt.registerSingleton<GetProducts>(GetProducts(getIt()));
-  getIt.registerSingleton<GetSideOptionsProducts>(
-    GetSideOptionsProducts(getIt()),
+
+  getIt.registerLazySingleton<ProductsRepository>(
+    () => ProductsRepositoryImp(getIt(), getIt()),
   );
-  getIt.registerSingleton<GetToppingsProducts>(GetToppingsProducts(getIt()));
+
+  getIt.registerLazySingleton<GetAllCategories>(
+    () => GetAllCategories(getIt()),
+  );
+
+  getIt.registerLazySingleton<GetProducts>(() => GetProducts(getIt()));
+
+  getIt.registerLazySingleton<GetSideOptionsProducts>(
+    () => GetSideOptionsProducts(getIt()),
+  );
+
+  getIt.registerLazySingleton<GetToppingsProducts>(
+    () => GetToppingsProducts(getIt()),
+  );
 
   getIt.registerFactory<ProductsCubit>(
     () => ProductsCubit(getIt(), getIt(), getIt()),
   );
+
   getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
 
   //! cart
@@ -105,5 +129,18 @@ void setUp() {
       getIt(), // GetAllOrders
       getIt(), // SaveOrder
     ),
+  );
+
+  //! Profile
+  getIt.registerSingleton<ProfileDataSource>(ProfileAPIDataSource(getIt()));
+
+  getIt.registerSingleton<ProfileRepository>(ProfileRepositoryImp(getIt()));
+
+  getIt.registerSingleton<GetProfile>(GetProfile(getIt()));
+
+  getIt.registerSingleton<UpdateProfile>(UpdateProfile(getIt()));
+
+  getIt.registerLazySingleton<ProfileCubit>(
+    () => ProfileCubit(getIt(), getIt()),
   );
 }

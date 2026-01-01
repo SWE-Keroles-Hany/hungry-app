@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/features/home/presentation/widgets/home_header.dart';
 import 'package:hungry_app/features/home/presentation/widgets/product_list.dart';
 import 'package:hungry_app/features/home/presentation/widgets/product_tabs.dart';
 import 'package:hungry_app/features/home/presentation/widgets/search_text_form.dart';
 import 'package:hungry_app/features/home/presentation/widgets/welcome_message.dart';
+import 'package:hungry_app/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:hungry_app/features/profile/presentation/cubit/profile_states.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -28,7 +31,14 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
         children: [
           SizedBox(height: 15.h),
           HomeHeader(imgURL: "assets/images/image.png"),
-          WelcomeMessage(name: "Kero"),
+          BlocBuilder<ProfileCubit, ProfileStates>(
+            builder: (context, state) {
+              if (state is SuccessGetProfileState) {
+                return WelcomeMessage(name: state.profile.name ?? "no name");
+              }
+              return SizedBox();
+            },
+          ),
           SizedBox(height: 10.h),
           SearchTextForm(),
           SizedBox(height: 12.h),

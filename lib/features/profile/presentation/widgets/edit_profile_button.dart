@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 
-class EditProfileButton extends StatelessWidget {
-  const EditProfileButton({super.key});
+class LogOut extends StatelessWidget {
+  const LogOut({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +19,17 @@ class EditProfileButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          SizedBox(width: 20.w),
           Text(
-            "Edit Profile",
+            "Log Out",
             style: textTheme.labelMedium!.copyWith(
               color: AppTheme.white,
               fontWeight: FontWeight.bold,
             ),
           ),
+          SizedBox(width: 20.w),
+          Icon(Icons.logout, color: AppTheme.white, size: 30.r),
           SizedBox(width: 10.w),
-          Icon(Icons.edit_outlined, color: AppTheme.white, size: 30.r),
         ],
       ),
     );

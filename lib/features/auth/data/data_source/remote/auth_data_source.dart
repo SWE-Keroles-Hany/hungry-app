@@ -5,5 +5,5 @@ import 'package:hungry_app/features/auth/data/models/sign_up_model.dart';
 abstract class AuthDataSource {
   Future<AuthResponseModel> login({required LoginModel loginModel});
   Future<AuthResponseModel> signUp({required SignUpModel signUpModel});
-  Future<AuthResponseModel> logOut();
+  Future<void> logOut();
 }

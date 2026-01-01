@@ -24,11 +24,11 @@ class AuthAPIDataSource implements AuthDataSource {
   }
 
   @override
-  Future<AuthResponseModel> logOut() async {
+  Future<void> logOut() async {
     try {
-      final response = await dio.post(endPoint: APIConstants.logout);
-      final logOutResponse = AuthResponseModel.fromJson(response);
-      return logOutResponse;
+      await dio.post(endPoint: APIConstants.logout);
+      // final logOutResponse = AuthResponseModel.fromJson(response);
+      // return logOutResponse;token
     } on AppException catch (exception) {
       throw AppException(exception.message);
     }

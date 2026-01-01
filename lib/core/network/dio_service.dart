@@ -69,7 +69,9 @@ class DioService implements APIService {
     } on DioException catch (exception) {
       log(exception.message ?? "");
       return handleDioError(exception);
-    } catch (_) {
+    } catch (error) {
+      log(error.toString());
+
       throw AppException("Some Thing Went Wrong");
     }
   }

@@ -11,10 +11,12 @@ class AuthRepositoryImp implements AuthRepository {
   final LocalDataSource _localDataSource;
 
   AuthRepositoryImp(this._authDataSource, this._localDataSource);
+
   @override
   Future<Either<AppException, void>> logOut() async {
     try {
       await _authDataSource.logOut();
+      await _localDataSource.clearToken();
       return Right(null);
     } on AppException catch (exception) {
       return Left(AppException(exception.message));

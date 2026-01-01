@@ -11,4 +11,6 @@ class APIConstants {
   static const String cart = "/cart";
   static const String removeFromCart = "/cart/remove";
   static const String orders = "/orders";
+  static const String updateProfile = "/update-profile";
+  static const String profile = "/profile";
 }
