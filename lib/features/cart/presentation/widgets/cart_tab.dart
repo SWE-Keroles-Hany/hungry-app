@@ -86,10 +86,10 @@ class CartListAndTotalPrice extends StatefulWidget {
 }
 
 class _CartListAndTotalPriceState extends State<CartListAndTotalPrice> {
+  double sum = 0.0;
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<CartCubit>();
-
     return Column(
       children: [
         Expanded(
@@ -97,12 +97,12 @@ class _CartListAndTotalPriceState extends State<CartListAndTotalPrice> {
             itemCount: widget.cart.items!.length,
             separatorBuilder: (context, index) => SizedBox(height: 20.h),
             itemBuilder: (_, index) {
-              int quntity = widget.cart.items![index].quantity!;
-
+              final cartItem = widget.cart.items![index];
+              int quntity = cartItem.quantity!;
               return CartItem(
-                price: widget.cart.items![index].price!,
+                price: cartItem.price!,
                 onRemove: () async {
-                  final itemId = widget.cart.items?[index].itemId;
+                  final itemId = cartItem.itemId;
                   if (itemId == null) {
                     UiUtils.showMessage(
                       message: "Some Thing Went Wrong",
@@ -118,8 +118,8 @@ class _CartListAndTotalPriceState extends State<CartListAndTotalPrice> {
                 },
 
                 quntity: quntity,
-                imgURL: widget.cart.items![index].image!,
-                name: widget.cart.items![index].name!,
+                imgURL: cartItem.image!,
+                name: cartItem.name!,
               );
             },
           ),
@@ -130,15 +130,10 @@ class _CartListAndTotalPriceState extends State<CartListAndTotalPrice> {
           onPressed: () => Navigator.of(
             context,
           ).pushNamed(CheckoutScreen.routeName, arguments: widget.cart),
-          totalPrice: widget.cart.totalPrice!,
+          totalPrice: "${widget.cart.totalPrice}",
           title: "Checkout",
         ),
       ],
     );
   }
-
-  // Future<void> onPlusPressed() async {}
-
-  // Future<void> onMinusPressed() async {}
-  // Future<void> onRemove() async {}
 }
