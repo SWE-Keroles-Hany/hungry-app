@@ -22,11 +22,21 @@ OutlineInputBorder getBorder() {
 }
 
 Never handleDioError(DioException e) {
-  final message = (e.response?.data is Map)
-      ? e.response?.data["message"]
-      : null;
+  final data = e.response?.data;
 
-  throw AppException(message ?? "Something went wrong");
+  String message = "Something went wrong";
+
+  if (data is Map<String, dynamic>) {
+    final serverMessage = data["message"];
+
+    if (serverMessage is String) {
+      message = serverMessage;
+    } else if (serverMessage is Map) {
+      message = serverMessage.values.first.first.toString();
+    }
+  }
+
+  throw AppException(message);
 }
 
 List<ProductItem> getDummyProducts() {

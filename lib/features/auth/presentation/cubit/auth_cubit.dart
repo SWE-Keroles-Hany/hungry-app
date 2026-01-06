@@ -59,6 +59,7 @@ class AuthCubit extends Cubit<AuthStates> {
 
   Future<void> isLoggedIn() async {
     emit(IsLoggedInLoadingState());
+    await Future.delayed(Duration(seconds: 2));
     final result = await _isLoggedIn.isLoggedIn();
     result.fold(
       (exception) {

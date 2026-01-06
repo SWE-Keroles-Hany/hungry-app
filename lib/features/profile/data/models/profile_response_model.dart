@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -6,7 +8,7 @@ class ProfileModel {
   final String? email;
   final String? address;
   final String? imageUrl; // جاي من السيرفر
-  final XFile? imageFile; // صورة محلية للرفع
+  final File? imageFile; // صورة محلية للرفع
 
   ProfileModel({
     this.name,
@@ -26,6 +28,13 @@ class ProfileModel {
     );
   }
 
+  Map<String, dynamic> toJson() => {
+    "name": name,
+    "email": email,
+    "address": address,
+    "image": imageFile!.path,
+  };
+
   // Model → FormData
   Future<FormData> toFormData() async {
     final formData = FormData();
@@ -43,7 +52,7 @@ class ProfileModel {
     if (imageFile != null) {
       formData.files.add(
         MapEntry(
-          "image",  
+          "image",
           await MultipartFile.fromFile(
             imageFile!.path,
             filename: imageFile!.path.split('/').last,

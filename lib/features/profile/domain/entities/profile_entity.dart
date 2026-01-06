@@ -8,7 +8,7 @@ class ProfileEntity {
   String? address;
   String? phone;
   String? imagePath;
-  XFile? imageFile;
+  File? imageFile;
 
   ProfileEntity({
     this.imageFile,

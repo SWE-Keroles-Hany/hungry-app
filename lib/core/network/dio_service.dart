@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:hungry_app/core/constants/api_constants.dart';
 import 'package:hungry_app/core/error/app_exceptions.dart';
@@ -58,19 +59,24 @@ class DioService implements APIService {
     required String endPoint,
     Object? data,
     Map<String, dynamic>? queryParams,
+    Options? options,
   }) async {
     try {
       final response = await dio.post(
+        options: options,
         endPoint,
         data: data,
         queryParameters: queryParams,
       );
+      log(response.toString());
       return handleResponse(response);
     } on DioException catch (exception) {
-      log(exception.message ?? "");
+      log("Exp : ${exception.response!.data}");
+      log("ExpRes : ${exception.response}");
+
       return handleDioError(exception);
     } catch (error) {
-      log(error.toString());
+      log("here in dio${error.toString()}");
 
       throw AppException("Some Thing Went Wrong");
     }

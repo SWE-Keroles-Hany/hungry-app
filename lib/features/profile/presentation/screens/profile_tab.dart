@@ -27,14 +27,23 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
+  File? file; // ✅ اتحطت هنا
+
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<ProfileCubit>();
     return Scaffold(
       backgroundColor: AppTheme.primaryColor,
       body: Padding(
         padding: EdgeInsets.all(20.r),
         child: BlocConsumer<ProfileCubit, ProfileStates>(
+          listenWhen: (previous, current) {
+            return current is LoadingUpdateProfileState ||
+                current is SuccessUpdateProfileState ||
+                current is ErrorUpdateProfileState;
+          },
+          buildWhen: (previous, current) {
+            return current is SuccessGetProfileState;
+          },
           listener: (context, state) {
             if (state is SuccessUpdateProfileState) {
               Navigator.of(context).pop();
@@ -44,7 +53,6 @@ class _ProfileTabState extends State<ProfileTab> {
               UiUtils.showMessage(message: state.message, isErrorMessage: true);
               context.read<ProfileCubit>().getProfile();
             } else if (state is LoadingUpdateProfileState) {
-              Navigator.of(context).pop();
               UiUtils.showLoadingIndicator(context);
             }
           },
@@ -55,61 +63,42 @@ class _ProfileTabState extends State<ProfileTab> {
               return UiUtils.showLoaidng();
             } else if (state is SuccessGetProfileState) {
               final user = state.profile;
+
               return Column(
                 children: [
                   SizedBox(height: 35.h),
-                  //! profile image
+
+                  //! Image
                   GestureDetector(
-                    onTap: () async {
-                      final source = ImageSource.gallery;
-                      final ImagePicker picker = ImagePicker();
-                      final xfile = await picker.pickImage(source: source);
-                      if (xfile == null) return;
-                      final file = File(xfile.path);
-                      log("File :${file.path}");
-                      await cubit.updateProfile(
-                        profile: ProfileEntity(
-                          address: user.address,
-                          email: user.email,
-                          name: user.name,
-                          imageFile: xfile,
-                        ),
-                      );
-                    },
-                    child: ProfilePicture(imgURL: user.imagePath ?? ""),
+                    onTap: pickImage,
+                    child: ProfilePicture(file: file),
                   ),
                   SizedBox(height: 35.h),
-                  //! profile info :  name
+
+                  //! Name
                   ProfileRowInfo(
                     label: AppConstants.name,
                     value: user.name ?? "",
                   ),
                   SizedBox(height: 35.h),
 
-                  //! profile info :  Email
+                  //! Email
                   ProfileRowInfo(
                     label: AppConstants.email,
                     value: user.email ?? "",
                   ),
                   SizedBox(height: 35.h),
 
-                  //! profile info :  Address
+                  //! Address
                   ProfileRowInfo(
                     label: AppConstants.address,
-                    value: user.address ?? "No Address Selected",
+                    value: user.address ?? "No Address",
                   ),
                   SizedBox(height: 30.h),
-
-                  // //! profile info :  Phone
-                  // ProfileRowInfo(
-                  //   label: AppConstants.phone,
-                  //   value: user.phone ?? "No Phone Number",
-                  // ),
-                  // SizedBox(height: 15.h),
                 ],
               );
             }
-            return SizedBox();
+            return const SizedBox();
           },
         ),
       ),
@@ -128,7 +117,7 @@ class _ProfileTabState extends State<ProfileTab> {
             children: [
               GestureDetector(
                 onTap: () async {
-                  context.read<AuthCubit>().logout();
+                  await context.read<AuthCubit>().logout();
                 },
                 child: LogOut(),
               ),
@@ -139,15 +128,19 @@ class _ProfileTabState extends State<ProfileTab> {
     );
   }
 
-  Future<void> pickImage(BuildContext context) async {
-    final source = ImageSource.gallery;
-    final ImagePicker picker = ImagePicker();
-    final xfile = await picker.pickImage(source: source);
-    if (xfile == null) return;
-    final selectedImagePath = xfile.path;
+  pickImage() async {
+    final picker = ImagePicker();
 
-    getIt<ProfileCubit>().updateProfile(
-      profile: ProfileEntity(imagePath: selectedImagePath),
-    );
+    final xfile = await picker.pickImage(source: ImageSource.gallery);
+    if (xfile == null) return;
+
+    setState(() {
+      file = File(xfile.path);
+    });
+
+    //! server return redirect webstie
+    // await context.read<ProfileCubit>().updateProfile(
+    //   profile: ProfileEntity(imageFile: file),
+    // );
   }
 }
