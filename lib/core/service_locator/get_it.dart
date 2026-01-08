@@ -33,6 +33,8 @@ import 'package:hungry_app/features/home/domain/use_cases/get_side_options_produ
 import 'package:hungry_app/features/home/domain/use_cases/get_toppings_products.dart';
 import 'package:hungry_app/features/home/presentation/cubit/categories_cubit.dart';
 import 'package:hungry_app/features/home/presentation/cubit/products_cubit.dart';
+import 'package:hungry_app/features/home/presentation/cubit/side_options_cubt.dart';
+import 'package:hungry_app/features/home/presentation/cubit/topping_cubit.dart';
 import 'package:hungry_app/features/order_history/data/data_source/orders_api_data_source.dart';
 import 'package:hungry_app/features/order_history/data/data_source/orders_data_source.dart';
 import 'package:hungry_app/features/order_history/data/repository/orders_repository.dart';
@@ -101,9 +103,11 @@ void setUp() {
     () => GetToppingsProducts(getIt()),
   );
 
-  getIt.registerFactory<ProductsCubit>(
-    () => ProductsCubit(getIt(), getIt(), getIt()),
-  );
+  getIt.registerFactory<ProductsCubit>(() => ProductsCubit(getIt()));
+
+  getIt.registerFactory<SideOptionsCubit>(() => SideOptionsCubit(getIt()));
+
+  getIt.registerFactory<ToppingsCubit>(() => ToppingsCubit(getIt()));
 
   getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt()));
 

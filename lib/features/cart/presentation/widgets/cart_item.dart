@@ -24,6 +24,7 @@ class CartItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Container(
+      margin: EdgeInsets.all(8.r),
       padding: EdgeInsets.all(30.r),
       decoration: BoxDecoration(
         boxShadow: [

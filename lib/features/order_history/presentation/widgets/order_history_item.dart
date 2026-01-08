@@ -23,6 +23,8 @@ class OrderHistoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Container(
+      margin: EdgeInsets.all(8.r),
+
       decoration: BoxDecoration(
         color: AppTheme.lightGray,
         // color: Colors.teal,

@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hungry_app/core/constants/app_constants.dart';
+import 'package:hungry_app/core/helper/app_helper.dart';
 import 'package:hungry_app/core/service_locator/get_it.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/core/utils/ui_utils.dart';
 import 'package:hungry_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:hungry_app/features/auth/presentation/cubit/auth_states.dart';
 import 'package:hungry_app/features/auth/presentation/screens/login_screen.dart';
+import 'package:hungry_app/features/home/presentation/widgets/product_list.dart';
 import 'package:hungry_app/features/profile/domain/entities/profile_entity.dart';
 import 'package:hungry_app/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:hungry_app/features/profile/presentation/cubit/profile_states.dart';
@@ -60,7 +62,7 @@ class _ProfileTabState extends State<ProfileTab> {
             if (state is ErrorGetProfileState) {
               return Center(child: Text(state.message));
             } else if (state is LoadingGetProfileState) {
-              return UiUtils.showLoaidng();
+              return CustomLoadingShimmer(children: GetProfileInfo());
             } else if (state is SuccessGetProfileState) {
               final user = state.profile;
 

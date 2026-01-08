@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hungry_app/core/helper/app_helper.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/core/utils/ui_utils.dart';
 import 'package:hungry_app/features/cart/domain/entities/cart_list_response_entity.dart';
@@ -8,6 +9,7 @@ import 'package:hungry_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:hungry_app/features/cart/presentation/cubit/cart_states.dart';
 import 'package:hungry_app/features/cart/presentation/widgets/cart_item.dart';
 import 'package:hungry_app/features/checkout/presentation/screens/checkout_screen.dart';
+import 'package:hungry_app/features/home/presentation/widgets/product_list.dart';
 import 'package:hungry_app/features/home/presentation/widgets/total_price_with_action.dart';
 
 class CartTab extends StatelessWidget {
@@ -53,7 +55,7 @@ class CartTab extends StatelessWidget {
             ),
           );
         } else if (state is LoadingGetCartState) {
-          return Center(child: UiUtils.showLoaidng());
+          return CustomLoadingShimmer(children: GetCartItms());
         } else if (state is SuccessGetCartState &&
             state.cartList.items!.isEmpty) {
           return Center(

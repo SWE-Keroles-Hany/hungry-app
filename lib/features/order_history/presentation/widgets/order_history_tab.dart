@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hungry_app/core/helper/app_helper.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/core/utils/ui_utils.dart';
+import 'package:hungry_app/features/home/presentation/widgets/product_list.dart';
 import 'package:hungry_app/features/order_history/presentation/cubit/orders_cubit.dart';
 import 'package:hungry_app/features/order_history/presentation/cubit/orders_states.dart';
 import 'package:hungry_app/features/order_history/presentation/widgets/order_history_item.dart';
@@ -15,7 +17,7 @@ class OrderHistoryTab extends StatelessWidget {
     return BlocBuilder<OrdersCubit, OrdersStates>(
       builder: (context, state) {
         if (state is LoadingGetAllOrdersState) {
-          return Center(child: UiUtils.showLoaidng());
+          return CustomLoadingShimmer(children: GetOrderHistoryItems());
         } else if (state is ErrorGetAllOrdersState) {
           return Center(
             child: Text(

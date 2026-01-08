@@ -9,6 +9,8 @@ import 'package:hungry_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:hungry_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:hungry_app/features/home/presentation/cubit/categories_cubit.dart';
 import 'package:hungry_app/features/home/presentation/cubit/products_cubit.dart';
+import 'package:hungry_app/features/home/presentation/cubit/side_options_cubt.dart';
+import 'package:hungry_app/features/home/presentation/cubit/topping_cubit.dart';
 import 'package:hungry_app/features/order_history/presentation/cubit/orders_cubit.dart';
 import 'package:hungry_app/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:hungry_app/splash_screen.dart';
@@ -24,6 +26,13 @@ Future<void> main() async {
       providers: [
         BlocProvider(create: (_) => getIt<AuthCubit>()..isLoggedIn()),
         BlocProvider(create: (_) => getIt<CartCubit>()..getCart()),
+        BlocProvider(create: (_) => getIt<ProductsCubit>()..getProducts()),
+
+        BlocProvider(create: (_) => getIt<ToppingsCubit>()..getToppings()),
+        BlocProvider(
+          create: (_) => getIt<SideOptionsCubit>()..getSideOptions(),
+        ),
+
         BlocProvider.value(
           value: getIt<CategoriesCubit>()..getAllCategorires(),
         ),

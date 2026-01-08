@@ -33,7 +33,7 @@ class _ProductTabsState extends State<ProductTabs> {
               child: SizedBox(
                 child: Row(
                   children: List.generate(
-                    getDummyProducts().length,
+                    GetDummyProducts().length,
                     (index) => TabItem(title: "AAAAA"),
                   ),
                 ),

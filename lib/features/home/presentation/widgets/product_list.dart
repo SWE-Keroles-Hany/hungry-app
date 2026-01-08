@@ -14,24 +14,11 @@ class ProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
-    final textTheme = Theme.of(context).textTheme;
     return BlocBuilder<ProductsCubit, ProductsStates>(
       builder: (context, state) {
         if (state is LoadingGetProductsState) {
           return Expanded(
-            child: Skeletonizer(
-              child: GridView(
-                padding: EdgeInsets.symmetric(vertical: 10.h),
-
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 15.r,
-                  mainAxisSpacing: 15.r,
-                  mainAxisExtent: height * 0.25,
-                  crossAxisCount: 2,
-                ),
-                children: getDummyProducts(),
-              ),
-            ),
+            child: ProductsLoadingShimmer(children: GetDummyProducts()),
           );
         } else if (state is ErrorGetProductsState) {
           return Center(child: Text(state.message));
@@ -41,7 +28,7 @@ class ProductList extends StatelessWidget {
           final allProducts = state.products;
           return Expanded(
             child: GridView.builder(
-              padding: EdgeInsets.symmetric(vertical: 10.h),
+              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 5.w),
               itemCount: allProducts.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisSpacing: 15.r,
@@ -72,6 +59,50 @@ class ProductList extends StatelessWidget {
         }
         return SizedBox();
       },
+    );
+  }
+}
+
+class ProductsLoadingShimmer extends StatelessWidget {
+  const ProductsLoadingShimmer({super.key, required this.children});
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.sizeOf(context).height;
+    return Skeletonizer(
+      child: GridView(
+        padding: EdgeInsets.symmetric(vertical: 10.h),
+
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisSpacing: 15.r,
+          mainAxisSpacing: 15.r,
+          mainAxisExtent: height * 0.25,
+          crossAxisCount: 2,
+        ),
+        children: children,
+      ),
+    );
+  }
+}
+
+class CustomLoadingShimmer extends StatelessWidget {
+  const CustomLoadingShimmer({
+    super.key,
+    this.isSideOptions = false,
+    required this.children,
+  });
+  final List<Widget> children;
+  final isSideOptions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Skeletonizer(
+      child: ListView(
+        scrollDirection: isSideOptions ? Axis.horizontal : Axis.vertical,
+        padding: EdgeInsets.all(20.r),
+        children: children,
+      ),
     );
   }
 }
