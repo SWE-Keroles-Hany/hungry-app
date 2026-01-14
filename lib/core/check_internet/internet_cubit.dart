@@ -10,23 +10,18 @@ class InternetCubit extends Cubit<InternetStates> {
   final _checker = InternetConnectionChecker.instance;
 
   void checkInternet() async {
-    /// ✅ 1- check أولي
     final hasInternet = await _checker.hasConnection;
     if (hasInternet) {
-      print("***Connected");
       emit(ConnectedInternetState());
     } else {
-      emit(NotConnectedInternetState("No Internet Connection"));
+      emit(NotConnectedInternetState());
     }
 
-    /// ✅ 2- stream
     subscription = _checker.onStatusChange.listen((status) {
       if (status == InternetConnectionStatus.connected) {
-        print("***Connected");
-
         emit(ConnectedInternetState());
       } else {
-        emit(NotConnectedInternetState("No Internet Connection"));
+        emit(NotConnectedInternetState());
       }
     });
   }

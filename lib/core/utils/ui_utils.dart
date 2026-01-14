@@ -126,6 +126,50 @@ class UiUtils {
     );
   }
 
+  static error(BuildContext context) {
+    Get.bottomSheet(
+      BottomSheet(
+        onClosing: () {},
+        builder: (context) {
+          return PopScope(
+            canPop: false,
+            child: Container(
+              height: 220.h,
+              padding: EdgeInsets.all(16.w),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Icon(Icons.error, size: 48, color: Colors.red),
+                  SizedBox(height: 12.h),
+                  const Center(
+                    child: Text(
+                      'Some Thing Went Wrong',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  const Text(
+                    'Try Again, Later',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   static Future<dynamic> showLoadingIndicator(BuildContext context) {
     return showDialog(
       context: context,
