@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hungry_app/core/constants/image_constants.dart';
+import 'package:hungry_app/core/constants/text_constants.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/core/utils/ui_utils.dart';
 import 'package:hungry_app/core/validation/app_validator.dart';
@@ -27,7 +29,7 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.sizeOf(context);
-
+    //! Auth States
     return SafeArea(
       child: BlocListener<AuthCubit, AuthStates>(
         listener: (context, state) {
@@ -55,31 +57,36 @@ class SignUpScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(height: size.height * 0.1),
-                    SvgPicture.asset("assets/icons/logo.svg"),
+                    //!  Logo
+                    SvgPicture.asset(ImageConstants.logo),
                     SizedBox(height: size.height * 0.1),
+                    //!  Name
                     CustomInputField(
                       validator: (value) => AppValidator.nameValidator(value),
                       controller: nameController,
-                      title: "Name",
+                      title: TextConstants.name,
                       textTheme: textTheme,
                     ),
+                    //!  E-mail
                     SizedBox(height: 16.h),
                     CustomInputField(
                       validator: (value) => AppValidator.emailValidator(value),
                       controller: emailController,
-                      title: "Email Address",
+                      title: TextConstants.emailAddress,
                       textTheme: textTheme,
                     ),
+                    //!  Password
                     SizedBox(height: 16.h),
                     CustomInputField(
                       isPasswordField: true,
                       validator: (value) =>
                           AppValidator.passwordValidator(value: value),
                       controller: passwordController,
-                      title: "Password",
+                      title: TextConstants.password,
                       textTheme: textTheme,
                     ),
                     SizedBox(height: 16.h),
+                    //! Confirm Password
                     CustomInputField(
                       isPasswordField: true,
                       validator: (value) =>
@@ -88,32 +95,25 @@ class SignUpScreen extends StatelessWidget {
                             value: confirmPasswordController.text,
                           ),
                       controller: confirmPasswordController,
-                      title: "Confirm Password",
+                      title: TextConstants.confirmPassword,
                       textTheme: textTheme,
                     ),
+
+                    //! on SignUp
                     SizedBox(height: 30.h),
                     CustomButton(
                       width: size.width * 0.8,
                       bgColor: AppTheme.white,
                       titleColor: AppTheme.black,
-                      title: "Sign up",
-                      onPressed: () async {
-                        if (_globalKey.currentState!.validate()) {
-                          await BlocProvider.of<AuthCubit>(context).signUp(
-                            signUpEntity: SignUpEntity(
-                              emailController.text,
-                              passwordController.text,
-                              nameController.text,
-                            ),
-                          );
-                        }
-                      },
+                      title: TextConstants.signUp,
+                      onPressed: () => onSignUp(context),
                     ),
+                    //! Have Account ?
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Have an Account ?",
+                          TextConstants.haveAccount,
                           style: textTheme.labelMedium!.copyWith(
                             color: AppTheme.white,
                             fontWeight: FontWeight.normal,
@@ -127,7 +127,7 @@ class SignUpScreen extends StatelessWidget {
                             ).pushReplacementNamed(LoginScreen.routeName);
                           },
                           child: Text(
-                            "Login",
+                            TextConstants.login,
                             style: textTheme.labelMedium!.copyWith(
                               color: AppTheme.white,
                             ),
@@ -143,5 +143,17 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  onSignUp(BuildContext context) async {
+    if (_globalKey.currentState!.validate()) {
+      await BlocProvider.of<AuthCubit>(context).signUp(
+        signUpEntity: SignUpEntity(
+          emailController.text,
+          passwordController.text,
+          nameController.text,
+        ),
+      );
+    }
   }
 }

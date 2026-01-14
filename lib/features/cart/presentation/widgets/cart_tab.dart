@@ -1,19 +1,33 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hungry_app/core/constants/text_constants.dart';
 import 'package:hungry_app/core/helper/app_helper.dart';
+import 'package:hungry_app/core/service_locator/get_it.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/core/utils/ui_utils.dart';
-import 'package:hungry_app/features/cart/domain/entities/cart_list_response_entity.dart';
+import 'package:hungry_app/core/widgets/custom_loading_shimmer.dart';
 import 'package:hungry_app/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:hungry_app/features/cart/presentation/cubit/cart_states.dart';
-import 'package:hungry_app/features/cart/presentation/widgets/cart_item.dart';
-import 'package:hungry_app/features/checkout/presentation/screens/checkout_screen.dart';
+import 'package:hungry_app/features/cart/presentation/widgets/cart_list_with_price.dart';
 import 'package:hungry_app/features/home/presentation/widgets/product_list.dart';
-import 'package:hungry_app/features/home/presentation/widgets/total_price_with_action.dart';
 
-class CartTab extends StatelessWidget {
+class CartTab extends StatefulWidget {
   const CartTab({super.key});
+
+  @override
+  State<CartTab> createState() => _CartTabState();
+}
+
+class _CartTabState extends State<CartTab> {
+  @override
+  void initState() {
+    super.initState();
+    getIt<CartCubit>().getCart();
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -63,7 +77,7 @@ class CartTab extends StatelessWidget {
               style: textTheme.labelMedium!.copyWith(
                 color: AppTheme.primaryColor,
               ),
-              "No Items In Cart",
+              TextConstants.noItemsInCart,
             ),
           );
         } else if (state is SuccessGetCartState) {
@@ -75,67 +89,6 @@ class CartTab extends StatelessWidget {
         }
         return const SizedBox();
       },
-    );
-  }
-}
-
-class CartListAndTotalPrice extends StatefulWidget {
-  const CartListAndTotalPrice({super.key, required this.cart});
-  final CartListResponseEntity cart;
-
-  @override
-  State<CartListAndTotalPrice> createState() => _CartListAndTotalPriceState();
-}
-
-class _CartListAndTotalPriceState extends State<CartListAndTotalPrice> {
-  double sum = 0.0;
-  @override
-  Widget build(BuildContext context) {
-    final cubit = context.read<CartCubit>();
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.separated(
-            itemCount: widget.cart.items!.length,
-            separatorBuilder: (context, index) => SizedBox(height: 20.h),
-            itemBuilder: (_, index) {
-              final cartItem = widget.cart.items![index];
-              int quntity = cartItem.quantity!;
-              return CartItem(
-                price: cartItem.price!,
-                onRemove: () async {
-                  final itemId = cartItem.itemId;
-                  if (itemId == null) {
-                    UiUtils.showMessage(
-                      message: "Some Thing Went Wrong",
-                      isErrorMessage: true,
-                    );
-                  } else {
-                    await cubit.deleteFromCart(productId: itemId).whenComplete(
-                      () async {
-                        await cubit.getCart();
-                      },
-                    );
-                  }
-                },
-
-                quntity: quntity,
-                imgURL: cartItem.image!,
-                name: cartItem.name!,
-              );
-            },
-          ),
-        ),
-        SizedBox(height: 10),
-        TotalPriceWithAction(
-          width: 200,
-          onPressed: () => Navigator.of(
-            context,
-          ).pushNamed(CheckoutScreen.routeName, arguments: widget.cart),
-          totalPrice: "${widget.cart.totalPrice}",
-          title: "Checkout",
-        ),
-      ],
     );
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +21,6 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final width = MediaQuery.sizeOf(context).width;
-    log("imgURL : ${imgURL}");
     return Container(
       padding: EdgeInsets.symmetric(vertical: 14.r, horizontal: 10.r),
       width: width * 0.45,
@@ -60,7 +57,6 @@ class ProductItem extends StatelessWidget {
               width: 100.w,
             ),
           ),
-          // Center(child: Image.network(imgURL, )),
           SizedBox(height: 5.h),
           Text(
             title,

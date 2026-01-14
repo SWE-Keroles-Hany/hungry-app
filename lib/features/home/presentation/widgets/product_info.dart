@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hungry_app/core/constants/app_constants.dart';
+import 'package:hungry_app/core/constants/image_constants.dart';
+import 'package:hungry_app/core/constants/text_constants.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/home/presentation/widgets/custom_slider.dart';
 
@@ -27,7 +28,7 @@ class ProductInfo extends StatelessWidget {
         children: [
           //! image
           CachedNetworkImage(
-            imageUrl: product.image ?? AppConstants.image,
+            imageUrl: product.image ?? ImageConstants.image,
             width: width * 0.45,
           ),
           SizedBox(width: 30.w),

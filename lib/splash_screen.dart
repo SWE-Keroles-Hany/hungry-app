@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hungry_app/core/constants/image_constants.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/core/utils/ui_utils.dart';
 import 'package:hungry_app/features/auth/presentation/cubit/auth_cubit.dart';
@@ -23,7 +24,6 @@ class SplashScreen extends StatelessWidget {
             if (state is IsLoggedInErrorState) {
               Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
             } else if (state is IsLoggedInSuccessState) {
-              // UiUtils.hideLoading(context);
               Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
             } else if (state is IsLoggedInLoadingState) {
               UiUtils.showLoadingIndicator(context);
@@ -32,9 +32,9 @@ class SplashScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: size.height * 0.25),
-              SvgPicture.asset("assets/icons/logo.svg"),
+              SvgPicture.asset(ImageConstants.logo),
               Spacer(),
-              Image.asset("assets/images/image.png"),
+              Image.asset(ImageConstants.product),
             ],
           ),
         ),

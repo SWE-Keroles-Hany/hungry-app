@@ -1,49 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hungry_app/core/constants/image_constants.dart';
+import 'package:hungry_app/core/constants/text_constants.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/home/presentation/cubit/products_cubit.dart';
 
-class SearchTextForm extends StatefulWidget {
-  const SearchTextForm({super.key});
-
-  @override
-  State<SearchTextForm> createState() => _SearchTextFormState();
-}
-
-class _SearchTextFormState extends State<SearchTextForm> {
+// ignore: must_be_immutable
+class SearchTextForm extends StatelessWidget {
+  SearchTextForm({super.key});
   final TextEditingController controller = TextEditingController();
+  List<BoxShadow>? boxShadow = [
+    BoxShadow(
+      color: AppTheme.black.withAlpha((0.15 * 255).toInt()), // 0.15 opacity
+      spreadRadius: 1,
+      blurRadius: 12,
+      offset: Offset(0, 6),
+    ),
+    BoxShadow(
+      color: AppTheme.black.withAlpha((0.05 * 255).toInt()), // 0.05 opacity
+      spreadRadius: 1,
+      blurRadius: 4,
+      offset: Offset(0, 2),
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
     return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: AppTheme.black.withAlpha(
-              (0.15 * 255).toInt(),
-            ), // 0.15 opacity
-            spreadRadius: 1,
-            blurRadius: 12,
-            offset: Offset(0, 6),
-          ),
-          BoxShadow(
-            color: AppTheme.black.withAlpha(
-              (0.05 * 255).toInt(),
-            ), // 0.05 opacity
-            spreadRadius: 1,
-            blurRadius: 4,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
+      decoration: BoxDecoration(boxShadow: boxShadow),
       child: TextField(
-        onChanged: (value) async {
-          await BlocProvider.of<ProductsCubit>(
-            context,
-          ).getProducts(name: value, categoryId: 1);
-        },
+        onChanged: (value) => onSearch(value, context),
         controller: controller,
         cursorColor: AppTheme.darkBrown,
         cursorRadius: Radius.circular(2.r),
@@ -52,13 +40,13 @@ class _SearchTextFormState extends State<SearchTextForm> {
           fillColor: AppTheme.white,
           filled: true,
           hint: Text(
-            "Search",
+            TextConstants.search,
             style: textTheme.labelMedium!.copyWith(color: AppTheme.darkBrown),
           ),
           prefixIcon: Padding(
             padding: EdgeInsets.only(left: 8.w, right: 6.w),
             child: Image.asset(
-              "assets/icons/search.png",
+              ImageConstants.searchIcon,
               // fit: BoxFit.contain,
             ),
           ),
@@ -69,5 +57,11 @@ class _SearchTextFormState extends State<SearchTextForm> {
         ),
       ),
     );
+  }
+
+  onSearch(String value, BuildContext context) async {
+    await BlocProvider.of<ProductsCubit>(
+      context,
+    ).getProducts(name: value, categoryId: 1);
   }
 }

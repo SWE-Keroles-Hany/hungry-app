@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:hungry_app/core/error/app_exceptions.dart';
 import 'package:hungry_app/features/cart/data/data_source/cart_api_data_source.dart';
 import 'package:hungry_app/features/cart/data/mappers/cart_List_response_model_mapper.dart';
+import 'package:hungry_app/features/cart/data/mappers/cart_item_response_model_mapper.dart';
 import 'package:hungry_app/features/cart/data/models/cart_request_model.dart';
 import 'package:hungry_app/features/cart/data/repository/cart_repository.dart';
 import 'package:hungry_app/features/cart/domain/entities/cart_list_response_entity.dart';
@@ -47,7 +48,9 @@ class CartRepositoryImp implements CartRepository {
   Future<Either<AppException, CartListResponseEntity>> getCart() async {
     try {
       final response = await _cartAPIDataSource.getCart();
-      // log("${response.cartList?.items![0].itemId}");
+      if (response.message == "Attempt to read property on null") {
+        return Right(CartListResponseEntity(items: [], totalPrice: '0'));
+      }
       return Right(
         response.cartList?.toEntity ??
             CartListResponseEntity(items: [], totalPrice: '0'),

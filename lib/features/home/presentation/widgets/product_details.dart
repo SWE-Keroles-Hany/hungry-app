@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hungry_app/core/constants/text_constants.dart';
 import 'package:hungry_app/core/utils/ui_utils.dart';
 import 'package:hungry_app/features/cart/domain/entities/cart_item_request_entity.dart';
 import 'package:hungry_app/features/cart/presentation/cubit/cart_cubit.dart';
@@ -44,7 +45,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             Navigator.of(context).pop();
             UiUtils.showMessage(
               isSuccessMessage: true,
-              message: "Added To Cart",
+              message: TextConstants.addedToCart,
             );
             BlocProvider.of<CartCubit>(context).getCart();
           }
@@ -82,7 +83,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               width: 200,
               totalPrice: "${widget.product.price}",
               onPressed: addToCart,
-              title: "Add To Cart",
+              title: TextConstants.addToCart,
             ),
           ],
         ),

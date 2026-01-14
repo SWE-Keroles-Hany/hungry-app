@@ -27,12 +27,10 @@ Future<void> main() async {
         BlocProvider(create: (_) => getIt<AuthCubit>()..isLoggedIn()),
         BlocProvider(create: (_) => getIt<CartCubit>()..getCart()),
         BlocProvider(create: (_) => getIt<ProductsCubit>()..getProducts()),
-
         BlocProvider(create: (_) => getIt<ToppingsCubit>()..getToppings()),
         BlocProvider(
           create: (_) => getIt<SideOptionsCubit>()..getSideOptions(),
         ),
-
         BlocProvider.value(
           value: getIt<CategoriesCubit>()..getAllCategorires(),
         ),

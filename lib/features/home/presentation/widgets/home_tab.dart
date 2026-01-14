@@ -1,26 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hungry_app/core/constants/image_constants.dart';
 import 'package:hungry_app/features/home/presentation/widgets/home_header.dart';
 import 'package:hungry_app/features/home/presentation/widgets/product_list.dart';
-import 'package:hungry_app/features/home/presentation/widgets/product_tabs.dart';
+import 'package:hungry_app/features/home/presentation/widgets/category_tabs.dart';
 import 'package:hungry_app/features/home/presentation/widgets/search_text_form.dart';
-import 'package:hungry_app/features/home/presentation/widgets/welcome_message.dart';
-import 'package:hungry_app/features/profile/presentation/cubit/profile_cubit.dart';
-import 'package:hungry_app/features/profile/presentation/cubit/profile_states.dart';
+import 'package:hungry_app/features/home/presentation/widgets/user_name.dart';
 
-class HomeTab extends StatefulWidget {
+class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
-
-  @override
-  State<HomeTab> createState() => _HomeTabState();
-}
-
-class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,20 +18,18 @@ class _HomeTabState extends State<HomeTab> with SingleTickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 15.h),
-          HomeHeader(imgURL: "assets/images/image.png"),
-          BlocBuilder<ProfileCubit, ProfileStates>(
-            builder: (context, state) {
-              if (state is SuccessGetProfileState) {
-                return WelcomeMessage(name: state.profile.name ?? "no name");
-              }
-              return SizedBox();
-            },
-          ),
+          //! Header
+          HomeHeader(imgURL: ImageConstants.product),
+          //! User Name
+          UserName(),
           SizedBox(height: 10.h),
+          //! Search
           SearchTextForm(),
           SizedBox(height: 12.h),
-          ProductTabs(),
+          //! Categories
+          CategorieTabs(),
           SizedBox(height: 12.h),
+          //! Products
           ProductList(),
           SizedBox(height: 12.h),
         ],

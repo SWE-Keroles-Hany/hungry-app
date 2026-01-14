@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hungry_app/core/constants/image_constants.dart';
+import 'package:hungry_app/core/constants/text_constants.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/core/utils/ui_utils.dart';
 import 'package:hungry_app/core/validation/app_validator.dart';
@@ -24,6 +26,7 @@ class LoginScreen extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.sizeOf(context);
     return SafeArea(
+      //! Auth States
       child: BlocListener<AuthCubit, AuthStates>(
         listener: (context, state) {
           if (state is LoginErrorState) {
@@ -49,53 +52,51 @@ class LoginScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(height: size.height * 0.1),
-                    SvgPicture.asset("assets/icons/logo.svg"),
+                    //! Logo
+                    SvgPicture.asset(ImageConstants.logo),
                     SizedBox(height: 10.h),
+
+                    //! E-mail
                     Text(
                       textAlign: TextAlign.center,
-                      "Welcome Back,Discover The Fast Food",
+                      TextConstants.descritption,
                       style: textTheme.labelSmall,
                     ),
                     SizedBox(height: size.height * 0.1),
                     CustomInputField(
                       validator: (value) => AppValidator.emailValidator(value),
                       controller: emailController,
-                      title: "Email Address",
+                      title: TextConstants.emailAddress,
                       textTheme: textTheme,
                     ),
+
+                    //! Password
                     SizedBox(height: 30.h),
                     CustomInputField(
                       validator: (value) =>
                           AppValidator.passwordValidator(value: value),
                       controller: passwordController,
                       isPasswordField: true,
-                      title: "Password",
+                      title: TextConstants.password,
                       textTheme: textTheme,
                     ),
                     SizedBox(height: 30.h),
+
+                    //! Login Button
                     CustomButton(
                       width: size.width * 0.8,
                       bgColor: AppTheme.white,
                       titleColor: AppTheme.black,
-                      title: "Login",
-                      onPressed: () async {
-                        // UiUtils.showLoadingIndicator(context);
-
-                        if (_globalKey.currentState!.validate()) {
-                          await BlocProvider.of<AuthCubit>(context).login(
-                            loginEntity: LoginEntity(
-                              emailController.text,
-                              passwordController.text,
-                            ),
-                          );
-                        }
-                      },
+                      title: TextConstants.login,
+                      onPressed: onLogin(context),
                     ),
+
+                    //! If Don't Have an Account !?
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Don't have an Account?",
+                          TextConstants.donNotHaveAccount,
                           style: textTheme.labelMedium!.copyWith(
                             color: AppTheme.white,
                             fontWeight: FontWeight.normal,
@@ -103,13 +104,11 @@ class LoginScreen extends StatelessWidget {
                         ),
 
                         TextButton(
-                          onPressed: () {
-                            Navigator.of(
-                              context,
-                            ).pushReplacementNamed(SignUpScreen.routeName);
-                          },
+                          onPressed: () => Navigator.of(
+                            context,
+                          ).pushReplacementNamed(SignUpScreen.routeName),
                           child: Text(
-                            "Sign up",
+                            TextConstants.signUp,
                             style: textTheme.labelMedium!.copyWith(
                               color: AppTheme.white,
                             ),
@@ -125,5 +124,13 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  onLogin(BuildContext context) async {
+    if (_globalKey.currentState!.validate()) {
+      await BlocProvider.of<AuthCubit>(context).login(
+        loginEntity: LoginEntity(emailController.text, passwordController.text),
+      );
+    }
   }
 }

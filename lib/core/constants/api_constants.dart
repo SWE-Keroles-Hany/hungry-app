@@ -13,4 +13,5 @@ class APIConstants {
   static const String orders = "/orders";
   static const String updateProfile = "/update-profile";
   static const String profile = "/profile";
+  static const String token = "token";
 }

@@ -59,22 +59,6 @@ class UiUtils {
     );
   }
 
-  // static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
-  //   BuildContext context,
-  //   String message,
-  //   bool isSucces,
-  // ) {
-  //   return ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(
-  //       content: Text(message, style: TextStyle(fontSize: 16)),
-  //       duration: Duration(seconds: 2),
-  //       backgroundColor: isSucces
-  //           ? Colors.green
-  //           : const Color.fromARGB(255, 255, 2, 2),
-  //     ),
-  //   );
-  // }
-
   static Widget showLoaidng() {
     return Card(
       elevation: 5.0,
@@ -86,11 +70,7 @@ class UiUtils {
           dotCount: 100,
           animating: true,
           sizeCurve: Curves.ease,
-          animatedSize: true,
-          // direction: WiperDirection.right,
-          // wiperWidth: 8.r,
-          // wiperColor: AppTheme.primaryColor,
-          // curve: Curves.easeInOutCirc,
+
           loading: true,
           child: Padding(
             padding: EdgeInsetsGeometry.all(20),
@@ -106,6 +86,7 @@ class UiUtils {
       context: context,
       builder: (context) {
         return PopScope(
+          canPop: false,
           child: SizedBox(
             child: AlertDialog(
               backgroundColor: Colors.transparent,

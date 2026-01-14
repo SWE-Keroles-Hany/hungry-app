@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hungry_app/core/constants/app_constants.dart';
+import 'package:hungry_app/core/constants/image_constants.dart';
 import 'package:hungry_app/core/error/app_exceptions.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/cart/presentation/widgets/cart_item.dart';
@@ -93,19 +93,19 @@ List<Widget> GetSideOptions() {
   return [
     SideOptionItem(
       addIcon: "assets/icons/green_add_icon.png",
-      imgURL: AppConstants.image,
+      imgURL: ImageConstants.image,
       name: "aaaa",
     ),
     SizedBox(width: 15.w),
     SideOptionItem(
       addIcon: "assets/icons/green_add_icon.png",
-      imgURL: AppConstants.image,
+      imgURL: ImageConstants.image,
       name: "aaaa",
     ),
     SizedBox(width: 15.w),
     SideOptionItem(
       addIcon: "assets/icons/green_add_icon.png",
-      imgURL: AppConstants.image,
+      imgURL: ImageConstants.image,
       name: "aaaa",
     ),
   ];
@@ -117,28 +117,28 @@ List<CartItem> GetCartItms() {
       price: '',
       onRemove: () {},
       name: '',
-      imgURL: AppConstants.image,
+      imgURL: ImageConstants.image,
       quntity: 0,
     ),
     CartItem(
       price: '',
       onRemove: () {},
       name: '',
-      imgURL: AppConstants.image,
+      imgURL: ImageConstants.image,
       quntity: 0,
     ),
     CartItem(
       price: '',
       onRemove: () {},
       name: '',
-      imgURL: AppConstants.image,
+      imgURL: ImageConstants.image,
       quntity: 0,
     ),
     CartItem(
       price: '',
       onRemove: () {},
       name: '',
-      imgURL: AppConstants.image,
+      imgURL: ImageConstants.image,
       quntity: 0,
     ),
   ];
@@ -163,28 +163,28 @@ List<Widget> GetProfileInfo() {
 List<OrderHistoryItem> GetOrderHistoryItems() {
   return [
     OrderHistoryItem(
-      imgURL: AppConstants.image,
+      imgURL: ImageConstants.image,
       title: '',
       quantity: 0,
       price: '',
       onPressed: () {},
     ),
     OrderHistoryItem(
-      imgURL: AppConstants.image,
+      imgURL: ImageConstants.image,
       title: '',
       quantity: 0,
       price: '',
       onPressed: () {},
     ),
     OrderHistoryItem(
-      imgURL: AppConstants.image,
+      imgURL: ImageConstants.image,
       title: '',
       quantity: 0,
       price: '',
       onPressed: () {},
     ),
     OrderHistoryItem(
-      imgURL: AppConstants.image,
+      imgURL: ImageConstants.image,
       title: '',
       quantity: 0,
       price: '',

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hungry_app/core/constants/text_constants.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:hungry_app/features/cart/presentation/widgets/cart_tab.dart';
 import 'package:hungry_app/features/home/presentation/widgets/home_tab.dart';
@@ -24,6 +25,26 @@ class _HomeScreenState extends State<HomeScreen> {
     CartTab(),
     OrderHistoryTab(),
     ProfileTab(),
+  ];
+
+  List<BottomNavigationBarItem> items = [
+    BottomNavigationBarItem(
+      icon: Icon(CupertinoIcons.home),
+      label: TextConstants.home,
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(CupertinoIcons.cart),
+      label: TextConstants.cart,
+    ),
+
+    BottomNavigationBarItem(
+      icon: Icon(Icons.local_restaurant_sharp),
+      label: TextConstants.orderHistory,
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(CupertinoIcons.profile_circled),
+      label: TextConstants.profile,
+    ),
   ];
 
   @override
@@ -52,33 +73,17 @@ class _HomeScreenState extends State<HomeScreen> {
             selectedItemColor: AppTheme.white,
             unselectedItemColor: AppTheme.mediumGray,
             backgroundColor: Colors.transparent,
-            onTap: (value) {
-              setState(() {
-                selectedTab = value;
-              });
-            },
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.home),
-                label: "Home",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.cart),
-                label: "Cart",
-              ),
-
-              BottomNavigationBarItem(
-                icon: Icon(Icons.local_restaurant_sharp),
-                label: "Order History",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.profile_circled),
-                label: "Profile",
-              ),
-            ],
+            onTap: onTapChage,
+            items: items,
           ),
         ),
       ),
     );
+  }
+
+  onTapChage(int value) {
+    setState(() {
+      selectedTab = value;
+    });
   }
 }
