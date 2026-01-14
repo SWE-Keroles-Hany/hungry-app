@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hungry_app/core/check_internet/internet_cubit.dart';
 import 'package:hungry_app/core/constants/image_constants.dart';
 import 'package:hungry_app/core/constants/text_constants.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
@@ -15,12 +16,26 @@ import 'package:hungry_app/features/auth/presentation/widgets/custom_button.dart
 import 'package:hungry_app/features/auth/presentation/widgets/custom_input_field.dart';
 import 'package:hungry_app/features/home/presentation/screens/home_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   static const String routeName = "LoginScreen";
   LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    context.read<InternetCubit>().checkInternet();
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -88,7 +103,7 @@ class LoginScreen extends StatelessWidget {
                       bgColor: AppTheme.white,
                       titleColor: AppTheme.black,
                       title: TextConstants.login,
-                      onPressed: onLogin(context),
+                      onPressed: () => onLogin(context),
                     ),
 
                     //! If Don't Have an Account !?

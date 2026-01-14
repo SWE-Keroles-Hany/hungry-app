@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:hungry_app/core/theme/app_theme.dart';
 import 'package:toastification/toastification.dart';
 import 'package:widget_loading/widget_loading.dart';
@@ -77,6 +79,49 @@ class UiUtils {
             child: ListTile(leading: Text('Counter')),
           ),
         ),
+      ),
+    );
+  }
+
+  static noInternetConnection() {
+    Get.bottomSheet(
+      BottomSheet(
+        onClosing: () {},
+        builder: (_) {
+          return PopScope(
+            canPop: false,
+            child: Container(
+              height: 220.h,
+              padding: EdgeInsets.all(16.w),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Icon(Icons.wifi_off, size: 48, color: Colors.red),
+                  SizedBox(height: 12.h),
+                  const Center(
+                    child: Text(
+                      'No Internet Connection',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  const Text(
+                    'Please check your internet connection',
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
