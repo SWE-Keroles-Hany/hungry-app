@@ -75,7 +75,7 @@ This ensures:
 1. Clone the repository
 
 ```bash
-git clone [https://github.com/SWE-Keroles-Hany/hungry-app/tree/development.git]
+git clone https://github.com/SWE-Keroles-Hany/hungry-app/tree/development.git
 ```
 
 2. Install dependencies
