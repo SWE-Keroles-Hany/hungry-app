@@ -5,6 +5,7 @@ class AppTheme {
   static const white = Colors.white;
   static const black = Colors.black;
   static const yellow = Colors.yellow;
+
   static const red = Colors.red;
   static const darkBrown = Color(0xff3C2F2F);
   static const Color mediumGray = Color(0xFF6A6A6A);
@@ -14,10 +15,15 @@ class AppTheme {
     appBarTheme: AppBarTheme(backgroundColor: white),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
+
       backgroundColor: Colors.transparent,
     ),
+    sliderTheme: SliderThemeData(
+      trackHeight: 10,
 
-    sliderTheme: SliderThemeData(trackHeight: 10, valueIndicatorColor: black),
+      // overlayShape: SliderComponentShape.noThumb,
+      valueIndicatorColor: black,
+    ),
     textTheme: TextTheme(
       labelSmall: TextStyle(
         color: white,

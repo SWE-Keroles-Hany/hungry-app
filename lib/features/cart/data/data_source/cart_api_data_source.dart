@@ -54,7 +54,8 @@ class CartAPIDataSource implements CartDataSource {
   Future<GetCartResponseModel> getCart() async {
     try {
       final response = await dio.get(endPoint: APIConstants.cart);
-      log(response.toString());
+      log("=====");
+      log(response);
       return GetCartResponseModel.fromJson(response);
     } on AppException catch (exception) {
       throw AppException(exception.message);

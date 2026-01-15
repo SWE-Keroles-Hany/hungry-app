@@ -48,16 +48,15 @@ class CartRepositoryImp implements CartRepository {
   Future<Either<AppException, CartListResponseEntity>> getCart() async {
     try {
       final response = await _cartAPIDataSource.getCart();
-      if (response.message == "Attempt to read property on null") {
-        return Right(CartListResponseEntity(items: [], totalPrice: '0'));
-      }
+
       return Right(
         response.cartList?.toEntity ??
             CartListResponseEntity(items: [], totalPrice: '0'),
       );
     } on AppException catch (exception) {
-      log(exception.message);
-
+      if (exception.message.contains("Attempt to read property")) {
+        return Right(CartListResponseEntity(items: [], totalPrice: '0'));
+      }
       return left(AppException(exception.message));
     } catch (_) {
       return left(AppException("Some Thing Went Wrong"));
